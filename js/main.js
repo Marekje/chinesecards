@@ -56,10 +56,12 @@ function Card(chinese, pinyin, translation) {
 
     console.log("Hello, stranger ! Stop looking at my innards and learn Chinese.");
     //var cardA = new Card('汉字', 'hàn zi', 'Chinese character', false, cardConst.cardKinds[2], ['汉', '字'], 0, 'Pierre');
-    var cardA = new Card('汉字', 'hàn zi', 'Chinese character');
-    var cardB = new Card('汉', 'hàn', 'About Chinese language');
-    var cardC = new Card('字', 'zi', 'Character');
-    var mainDeck = new Deck([cardA, cardB, cardC], 'Pierre', 'Pierre');
+    //var cardA = new Card('汉字', 'hàn zi', 'Chinese character');
+    //var cardB = new Card('汉', 'hàn', 'About Chinese language');
+    //var cardC = new Card('字', 'zi', 'Character');
+    //var mainDeck = new Deck([cardA, cardB, cardC], 'Pierre', 'Pierre');
+
+    //var mainDeck = new Deck([]);
 
     var bodyHTML = document.getElementsByTagName('body')[0];
 
@@ -84,6 +86,7 @@ function Card(chinese, pinyin, translation) {
     // -> show a card
     // -> Add a way to (show the next card)+(change the first card's number of view) when you click a button
     function main(location) {
+        var deck = createDeck();
         location.innerHTML = '';
 
         var mainMenuLocation = document.createElement('div');
@@ -95,16 +98,20 @@ function Card(chinese, pinyin, translation) {
         location.appendChild(contentLocation);
 
         //add a menu to choose between learning and adding cards
-        navigateTheApp(mainMenuLocation);
+        navigateTheApp(mainMenuLocation, deck);
 
-        //After refresh, learn cards !
-        learnCardsOneByOne(contentLocation, mainDeck.cards);
+        //After refresh, learn cards if the deck is not empty, otherwise add cards
+        if (deck.cards.length === 0) {
+            saveNewCards(contentLocation, deck);
+        } else {
+            learnCardsOneByOne(contentLocation, deck);
+        }
     }
 
     // NAVIGATE THROUGH THE APPLICATION
     // -> Shows a menu
     // -> The menu helps you navigate through the app
-    function navigateTheApp(location) {
+    function navigateTheApp(location, deck) {
         location.innerHTML = '';
 
         // Logo
@@ -122,11 +129,11 @@ function Card(chinese, pinyin, translation) {
 
         document.getElementById('learncards-link').addEventListener('click', function(e) {
             var contentLocation = document.querySelector('.content__location')
-            learnCardsOneByOne(contentLocation, mainDeck.cards);
+            learnCardsOneByOne(contentLocation, deck);
         }, false)
         document.getElementById('addcards-link').addEventListener('click', function(e) {
             var contentLocation = document.querySelector('.content__location')
-            saveNewCards(contentLocation, mainDeck.cards);
+            saveNewCards(contentLocation, deck);
         }, false)
     }
 
@@ -138,7 +145,7 @@ function Card(chinese, pinyin, translation) {
         location.innerHTML = ''; //empty the place where I put the card-to-be-learned
         cardId = ids.learningCard; //an ID making it easy for the button to know its Card
 
-        var cardToShow = showFirstCard(deck);
+        var cardToShow = oneCardHTML(deck.cards[0]);
             cardToShow.setAttribute('id', cardId); //Add the ID to the Card
         var nextButton = nextCardButton();
 
@@ -153,10 +160,13 @@ function Card(chinese, pinyin, translation) {
             var cardToSave = createCardFromHTML(cardToSaveHTML);
 
             //cardToDeck(cardToSave, mainDeck.cards);
-            sortFirstCard(mainDeck.cards);
+            sortFirstCard(deck.cards, 'end');
 
             //show a new Card
-            learnCardsOneByOne(location, mainDeck.cards);
+            learnCardsOneByOne(location, deck);
+
+            //save the deck
+            saveDeckToLocalStorage(deck);
 
         }, false)
     };
@@ -184,11 +194,13 @@ function Card(chinese, pinyin, translation) {
             var cardToSaveForm = document.getElementById(formId);
             var cardToSave = createCardFromForm(cardToSaveForm);
 
-            cardToDeck(cardToSave, mainDeck.cards);
+            addCardToDeck(cardToSave, deck.cards, 'beginning');
+            saveDeckToLocalStorage(deck);
 
-            saveNewCards(location, mainDeck.cards);
+            saveNewCards(location, deck);
 
         }, false)
+
 
     };
 
@@ -208,13 +220,13 @@ function Card(chinese, pinyin, translation) {
 /* ######################*/
 /* start : BUILDING BLOCKS OF APP */
 
-    // SHOW ONE CARD
-    // -> make its HTML
-    // -> Return its HTML
-    function showFirstCard(deck) {
-        //var card = deck.shift()
-        var cardHTML = oneCardHTML(deck[0]);
-        return cardHTML;
+    //if a deck exists in LocalStorage, get it, else create one
+    function createDeck() {
+        var deck = getDeckFromLocalStorage('maindeck');
+        if (!deck) {
+            deck = new Deck([]);
+        }
+        return deck;
     }
 
     // PUT A CARD YOU JUST SAW BACK TO ITS DECK
@@ -230,14 +242,29 @@ function Card(chinese, pinyin, translation) {
         for (i=0; i<deck.length; i++) {
             deckShow += ' - ' + deck[i].chinese;
         }
-        console.log(deckShow);
+
     }
 
-    // SWITCH CARD FROM deck[0] TO deck[end]
+    // SWITCH CARD FROM deck[0] TO deck[place]
+    // Possible places : next | (number||last) | last
     // -> (deck)
-    function sortFirstCard(deck) {
+    function sortFirstCard(deck, position) {
         var card = deck.shift();
-        deck.push(card);
+        //deck.push(card);
+        addCardToDeck(card, deck, position);
+    }
+
+    // ADD A NEW CARD TO A DECK
+    // (Card object, Deck object, Position you want to put the Card in the Deck)
+    // Possible positions : beginning, end, number||end
+    function addCardToDeck(card, deck, position) {
+        if(position === 'beginning') {
+            deck.unshift(card);
+        } else if (position === 'end') {
+            deck.push(card);
+        } else {
+            position<deck.length ? deck.splice(position, 0, card) : deck.push(card);
+        }
     }
 
     // createCardFromHTML
@@ -275,13 +302,14 @@ function Card(chinese, pinyin, translation) {
 /* start : HTML TEMPLATES */
 
     function oneCardHTML(card) {
-            var cardHTML  = document.createElement('div');
+
+        var cardHTML  = document.createElement('div');
             cardHTML.className = 'card';
             cardHTML.id = card.uniqueId;
 
-            cardHTML.appendChild(itemHTML('p', cardConst.cardChineseClass, card.chinese));
-            cardHTML.appendChild(itemHTML('p', cardConst.cardPinyinClass, card.pinyin));
-            cardHTML.appendChild(itemHTML('p', cardConst.cardTranslationClass, card.translation));
+        cardHTML.appendChild(itemHTML('p', cardConst.cardChineseClass, card.chinese));
+        cardHTML.appendChild(itemHTML('p', cardConst.cardPinyinClass, card.pinyin));
+        cardHTML.appendChild(itemHTML('p', cardConst.cardTranslationClass, card.translation));
 
         return cardHTML;
     };
@@ -386,8 +414,23 @@ function Card(chinese, pinyin, translation) {
 /* ######################*/
 
 /* ######################*/
-/* start : DATA FROM FRONT TO BACK TO FRONT */
-    function saveDataFromForm() {};
-    function getOneCardData() {}
-/* stop : DATA FROM FRONT TO BACK TO FRONT */
+/* start : LOCALSTORAGE */
+    function saveDeckToLocalStorage(deck) {
+        var deckToSave = JSON.stringify(deck)
+        localStorage.setItem('maindeck', deckToSave);
+        console.log('saved' + localStorage.getItem('maindeck'));
+    }
+
+    function getDeckFromLocalStorage() {
+        var savedDeck = localStorage.getItem('maindeck');
+        if (savedDeck) {
+            console.log('Got the deck !')
+            deck = JSON.parse(savedDeck);
+        } else {
+            console.log('there is no deck (yet) in LocalStorage.')
+            return false;
+        }
+        return deck;
+    }
+/* stop : LOCALSTORAGE */
 /* ######################*/
