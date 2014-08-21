@@ -51,25 +51,83 @@ table {
   border-spacing: 0; }
 
 /* BASE */
+html {
+  background-color: #222;
+  font-size: 100%;
+  font-size: 1rem; }
+
+body {
+  font-family: "Chaparral", "Chaparral Pro", "Noto sans", Georgia, serif;
+  max-width: 20em;
+  background-color: #323951; }
+
+/*------------------------------------*\
+    #TYPOGRAPHY
+\*------------------------------------*/
+.text-code {
+  font-family: "Anonymous Pro", "Courier New", Courier; }
+
+.text-chinese {
+  font-family: "Noto sans", Verdana; }
+
+a {
+  color: #ffed90; }
+  a:hover {
+    color: #ffa57f; }
+
 /* LAYOUT */
 /* MODULES */
 .card {
   float: left;
-  margin: 0.5em;
   padding: 0.5em;
-  background-color: #eee;
-  font-size: 1.3rem;
-  font-family: Noto, sans-serif; }
+  border: 2px solid #181b27;
+  background-color: #eeece0;
+  font-size: 1.3rem; }
 
 .card p {
   padding: 0.5em;
   margin: 0.5em; }
 
-.card__pinyin {
-  font-style: italic; }
+/*
+    NAV module
+    -> styles pertaining to the main navigation element,
+        the menu on the top of the app.
+*/
+.mainnav {
+  color: #eeece0; }
 
-.card__translation {
-  font-size: 0.7em; }
+.mainnav h1,
+.mainnav ul,
+.mainnav li {
+  display: inline-block; }
 
-.card [contenteditable="true"] {
-  background-color: rgba(0, 0, 0, 0.1); }
+.mainnav h1 {
+  color: #eeece0; }
+
+.mainnav ul {
+  float: right; }
+
+/*------------------------------------*\
+    #BUTTONS
+
+    -> CODEPEN : http://codepen.io/Marekje/pen/lIwzn?editors=010
+    -> GITHUB  : https://gist.github.com/Marekje/58e8c9103af720e71905
+    (That buttons system should serve as a base for this one)
+\*------------------------------------*/
+.btn {
+  border: 1px solid #181b27;
+  background-color: #ffed90;
+  color: #323951; }
+
+.btn__action {
+  display: block;
+  min-width: 4em;
+  min-height: 4em;
+  border-radius: 100%; }
+
+.btn__main-action {
+  background-color: #a8d46f;
+  color: #323951; }
+
+/* STATES */
+/* BASE */

@@ -1,21 +1,15 @@
 
 /*  #########
     CONSTANTS
-    Stuff that shouldn't bulge unless I learnt of forgot something...
+    Stuff that shouldn't bulge unless I learnt or forgot something...
 */
 var cardConst = {
     cardKinds : ['key', 'character', 'word', 'sentence', 'text'],
-    cardLevels : 5, // -> http://en.wikipedia.org/wiki/Spaced_repetition
     cardChineseClass : 'card__chinese',
     cardPinyinClass : 'card__pinyin',
     cardTranslationClass : 'card__translation',
 }
-
-var ids = {
-    learningCard : "learning-card",
-    cardForm : "card-form"
-}
-var appTitle = "学习stories";
+var appTitle = "学习 - xuéxi";
 
 
 /*  #######
@@ -23,31 +17,271 @@ var appTitle = "学习stories";
     Main prototypes for this app's blocks of knowledge
 */
 
-function Deck(cards) {
-    this.cards = cards;
-  /*this.owner = owner;
-    this.creator = creator;
-    this.creationDate = setNowTime();
-    this.modifDate = setNowTime();
-    this.past = '0';*/
+function App(appLocation) {
+
+    /* PARAMS*/
+    this.location = appLocation,
+
+    /* CONTENT */
+    this.title = '学习stories';
+    this.decks = [new Deck],
+
+    /* METHODS */
+
+    /* --- /!\ THE MAIN FUNCTION /!\ --- */
+    // CREATE HTML
+    // -> Creates the whole HTML for the whole app.
+    // -> Inside, you'll find a menu, a place for the main stuff you're doing...
+    this.createHTML = function() {
+        //appLocation.appendChild(this.decks[0].showAllCardsHTML());
+        //appLocation.appendChild(this.decks[0].showCardsOneByOne(this.decks[0]));
+
+        var mainContent = document.createElement('section');
+            mainContent.id = 'mainContent';
+            mainContent.className = 'container';
+
+            mainContent.appendChild(this.decks[0].showCardsOneByOne(this.decks[0]))
+
+        var mainMenu = document.createElement('nav');
+            mainMenu.id = 'mainMenu';
+            mainMenu.className = 'menu';
+
+            mainMenu.appendChild(createLogoHTML(appTitle));
+            mainMenu.appendChild(learnAction('mainContent', app.decks[0]));
+            mainMenu.appendChild(addAction('mainContent'));
+
+        appLocation.appendChild(mainMenu);
+        appLocation.appendChild(mainContent);
+    }
+
+    //
+    this.addCardsToDeck = function() {
+        var theNewCard = new Card();
+        appLocation.appendChild(theNewCard.createEditableHTML(theNewCard));
+        this.decks[0].addCard(theNewCard);
+
+
+        // THIS WORKS
+        // ADD A BUTTON TO RUN addCardsHTML again
+        // ADD A FRACKING MENU :P
+    }
+}
+
+function Deck() {
+
+    /* PARAMS */
+    this.dateCrea = Date.now(),
+    this.datesModif = [],
+
+    /* CONTENT */
+    this.cards = [],
+
+    /* METHODS */
+
+    // UPDATE THE DATESMODIF AR
+    // -> add a new date to the this.datesModif array
+    this.updateDatesModif = function() {
+        this.datesModif.push(Date.now);
+    },
+
+    // ADDCARD
+    // -> add a Card to the this.cards array
+    this.addCard = function(newCard) {
+        if (newCard.chinese) {
+            this.cards.push(newCard);
+        }
+    }
+
+    // JUST LEARNT IT
+    // -> take the previous card
+    // -> IMPROVEMENT : USE THE LEVEL OF LEARNING
+    //      TO KNOW HOW FAR IN THE DECK TO SPLICE
+    //      THIS CARD.
+    this.justLearntIt = function(boolean) {
+        var previousCard = this.cards.shift();
+
+        if (boolean) {
+            this.cards.push(previousCard);
+        } else {
+            this.cards.splice(5, 0, previousCard); //add the card at the fifth place of the deck
+        }
+    };
+
+    // SHOW ONE CARD
+    // -> returns a card in HTML
+    this.showOneCard = function(index) {
+        var card = this.cards[index].createHTML();
+        return card;
+    }
+
+    // NEXT CARD
+    // -> ARRANGE A CARD LEARNT
+    // -> SHOW THE NEXT ONE
+
+    // SHOW ALL CARDS AT ONCE
+    // -> Shows every Card next to each other
+    this.showAllCardsHTML = function() {
+        console.log('Deck.showAllCardsHTML()');
+        var cardsHTML = document.createElement('section');
+            cardsHTML.className = 'allcards';
+        for (i=0; i<this.cards.length; i++) {
+            cardsHTML.appendChild(this.cards[i].createHTML());
+        }
+        return cardsHTML;
+    }
+
+    // SHOW ALL CARDS ONE BY ONE
+    // -> Shows every card of the deck, one by one.
+    // -> Doesn't update anything in the Cards
+    this.showCardsOneByOne = function(deck) {
+        console.log('Deck.showCardsOneByOne()');
+
+        // DATA
+        cardBlockId = 'cardBlock';
+
+        // SECTION
+        var cardsHTML = document.createElement('section');
+
+        // SHOW A CARD HERE
+        var cardBlockHTML = document.createElement('div');
+            cardBlockHTML.id = cardBlockId;
+            cardBlockHTML.appendChild(deck.cards[0].createHTML());
+
+        // MODIFY/CHANGE THE CARD HERE
+        var editCardHTML = document.createElement('div');
+            editCardHTML.id = 'cardToolbarBlock';
+
+            //EDIT BUTTON
+            var editButton = document.createElement('button'); // NOT FUNCTIONAL YET
+                editButton.textContent = 'Edit';
+
+            // NEXT CARD BUTTON
+            var nextCardButton = nextCardButtonHTML();
+                nextCardButton.addEventListener('click', function() {
+                    var location = document.querySelector('#'+cardBlockId);
+                    location.innerHTML = '';
+                    deck.justLearntIt(true);
+                    location.appendChild(deck.showOneCard(0));
+                }, false)
+
+            editCardHTML.appendChild(editButton);
+            editCardHTML.appendChild(nextCardButton);
+
+        // ADD EVERYTHING TO THE SECTION
+        cardsHTML.appendChild(cardBlockHTML);
+        cardsHTML.appendChild(editCardHTML);
+
+
+        return cardsHTML;
+    }
 }
 
 function Card(chinese, pinyin, translation) {
-    this.chinese = chinese;
-    this.pinyin = pinyin;
-    this.translation = translation;
-    /*this.sound = sound;
-    this.kind = kind;
-    this.blocks = blocks;
-    this.level = level;
-    this.owner = owner;
-    this.creator = creator;
-    this.creationDate = setNowTime();
-    this.modifDate = setNowTime();
-    this.past = '0';
-    this.uniqueId = setCardId();*/
+
+    /* PARAMS */
+    this.dateCrea = Date.now(),
+    this.datesModif = [],
+
+    /* CONTENT */
+    this.chinese = new CardItem(chinese),
+    this.pinyin = new CardItem(pinyin),
+    this.translation = new CardItem(translation),
+
+    /* METHODS */
+
+    this.updateDatesModif = function() { this.datesModif.push(Date.now); },
+
+    // CREATEHTML
+    // -> makes an HTML version of the Card
+    // -> returns it
+    this.createHTML = function() {
+
+        var cardHTML = document.createElement('div');
+            cardHTML.className = 'card';
+
+        cardHTML.appendChild(this.chinese.createHTML('chinese'));
+        cardHTML.appendChild(this.pinyin.createHTML('pinyin'));
+        cardHTML.appendChild(this.translation.createHTML('translation'));
+
+        return cardHTML;
+    }
+
+    // MAKES AND EDITABLE HTML VERSION OF THE CARD
+    // -> Creates an editable HTML version of the Card
+    // -> Saves it instantly in the Card Object
+    // -> Adds it to the only deck in the list (WHEN SEVERAL DECKS, TAKE ACTIVE DECK)
+    this.createEditableHTML = function(newCard) {
+        var cardHTML = document.createElement('div');
+            cardHTML.className = 'card';
+
+        cardHTML.appendChild(this.chinese.createEditableHTML('chinese'));
+        cardHTML.appendChild(this.pinyin.createEditableHTML('pinyin'));
+        cardHTML.appendChild(this.translation.createEditableHTML('translation'));
+
+        cardHTML.addEventListener('keyup', function(e) {
+            var chineseHTML = this.querySelector('.card__item--chinese').textContent;
+            var pinyinHTML = this.querySelector('.card__item--pinyin').textContent;
+            var translationHTML = this.querySelector('.card__item--translation').textContent;
+
+            newCard.chinese.content = chineseHTML;
+            newCard.pinyin.content = pinyinHTML;
+            newCard.translation.content = translationHTML;
+
+        }, false)
+
+        return cardHTML;
+    }
 }
 
+function CardItem(content) {
+
+    /* PARAMS */
+    this.dateCrea = Date.now(), // the creation date
+    this.datesModif = []; //the last modif date
+
+    /* CONTENT */
+    this.content = content, // a string, such as "汉字" or "hanzi"
+    this.marks = new ItemMarks(),
+
+    /* METHODS */
+
+    // CREATEHTML
+    // -> makes an HTML version of the item
+    // -> returns it
+    this.createHTML = function(specificClass) {
+        var itemHTML = document.createElement('div');
+            itemHTML.className = 'card__item card__item--'+specificClass;;
+            itemHTML.textContent = this.content;
+
+        return itemHTML;
+    }
+
+    // MAKES AN EDITABLE HTML VERSION OF THE CARDITEM
+    // -> Instantly updates the CardItem Object
+    this.createEditableHTML = function(specificClass) {
+        var itemHTML = document.createElement('div');
+            itemHTML.className = ' card__item card__item--editable card__item--'+specificClass;;
+            itemHTML.setAttribute('contenteditable', 'true');
+            itemHTML.textContent = this.content;
+
+        return itemHTML;
+    }
+
+}
+
+function ItemMarks() {
+    this.marks = [0], // the marks the item got : [1, 1, 2, 3, 4, 4, 4, 4, 5] (0 == not seen yet)
+    this.marksDates = [Date.now()], // the dates when the marks happened : [timestamp, timestamp, ...]
+    this.dateCrea = Date.now(),
+
+    // addMark
+    // -> Add a new mark in the marks array
+    // -> Add the date in the marksDates array
+    this.addMark = function(boolean) {
+        lastMark = this.marks.length;
+        boolean ? this.marks.push(lastMark+1) : this.marks.push(lastMark);
+    }
+}
 
 /*  #### ####
     MAIN CODE
@@ -55,20 +289,33 @@ function Card(chinese, pinyin, translation) {
 */
 
     console.log("Hello, stranger ! Stop looking at my innards and learn Chinese.");
-    //var cardA = new Card('汉字', 'hàn zi', 'Chinese character', false, cardConst.cardKinds[2], ['汉', '字'], 0, 'Pierre');
-    //var cardA = new Card('汉字', 'hàn zi', 'Chinese character');
-    //var cardB = new Card('汉', 'hàn', 'About Chinese language');
-    //var cardC = new Card('字', 'zi', 'Character');
-    //var mainDeck = new Deck([cardA, cardB, cardC], 'Pierre', 'Pierre');
-
-    //var mainDeck = new Deck([]);
 
     var bodyHTML = document.getElementsByTagName('body')[0];
 
     //learnCardsOneByOne(bodyHTML, mainDeck.cards);
     //saveNewCards(bodyHTML, mainDeck.cards);
 
-    main(bodyHTML);
+    var card1 = new Card('一', 'yi', 'one');
+    var card2 = new Card('二', 'er', 'two');
+    var card3 = new Card('三', 'san', 'three');
+    var card4 = new Card('四', 'si', 'four');
+    var card5 = new Card('五', 'wu', 'five');
+    var card6 = new Card('六', 'liu', 'six');
+    var card7 = new Card('七', 'qi', 'seven');
+
+    var appLocation = document.querySelector('body');
+    var app = new App(appLocation);
+
+    app.decks[0].addCard(card1);
+    app.decks[0].addCard(card2);
+    app.decks[0].addCard(card3);
+    app.decks[0].addCard(card4);
+    app.decks[0].addCard(card5);
+    app.decks[0].addCard(card6);
+    app.decks[0].addCard(card7);
+
+    app.createHTML();
+
 
 /* end : MAIN CODE
 ##################
@@ -89,8 +336,8 @@ function Card(chinese, pinyin, translation) {
         var deck = createDeck();
         location.innerHTML = '';
 
-        var mainMenuLocation = document.createElement('div');
-            mainMenuLocation.className = 'mainmenu__location';
+        var mainMenuLocation = document.createElement('nav');
+            mainMenuLocation.className = 'mainmenu__location mainnav';
         location.appendChild(mainMenuLocation);
 
         var contentLocation = document.createElement('div');
@@ -156,15 +403,9 @@ function Card(chinese, pinyin, translation) {
         nextButton.addEventListener('click', function(e) {
 
             // Push the previous Card back to the end of the deck
-            var cardToSaveHTML = document.getElementById(cardId);
-            var cardToSave = createCardFromHTML(cardToSaveHTML);
-
-            //cardToDeck(cardToSave, mainDeck.cards);
             sortFirstCard(deck.cards, 'end');
-
             //show a new Card
             learnCardsOneByOne(location, deck);
-
             //save the deck
             saveDeckToLocalStorage(deck);
 
@@ -201,17 +442,6 @@ function Card(chinese, pinyin, translation) {
 
         }, false)
 
-
-    };
-
-    // EDIT A CARD
-    // -> get the card form and put the card you want to edit in it
-    // -> empty the form for the next card
-    // -> get a button to go to learnCardsOneByOne
-    function editCards(location, deck) {
-        location.innerHTML = '';
-
-        var cardForm = cardFormHTML();
     };
 
 /* stop : SCREEN STATES */
@@ -219,6 +449,12 @@ function Card(chinese, pinyin, translation) {
 
 /* ######################*/
 /* start : BUILDING BLOCKS OF APP */
+
+    // LEARN ONE CARD
+    function learnOneCard(card) {
+        var cardHTML = oneCardHTML(card);
+        return cardHTML;
+    }
 
     //if a deck exists in LocalStorage, get it, else create one
     function createDeck() {
@@ -360,14 +596,6 @@ function Card(chinese, pinyin, translation) {
         return formGroup;
     };
 
-    function nextCardButton() {
-        var button = document.createElement('button');
-            button.setAttribute('id', 'next-button');
-            button.textContent = 'Next';
-
-        return button;
-    };
-
     function itemHTML(nameOfElement, nameOfClass, content) {
         var itemHTML = document.createElement(nameOfElement);
             itemHTML.className = nameOfClass;
@@ -400,6 +628,17 @@ function Card(chinese, pinyin, translation) {
 
     }
 
+    //NEXT CARD BUTTON
+    // ->
+    function nextCardButtonHTML() {
+        var button = document.createElement('button');
+            button.setAttribute('id', 'next-button');
+            button.className = 'btn btn__action btn__main-action';
+            button.textContent = 'Next';
+
+        return button;
+    };
+
     // CREATE A LOGO ('string')
     // -> get a text and a link to the "Home"
     // -> Put it inside a box
@@ -411,6 +650,80 @@ function Card(chinese, pinyin, translation) {
     }
 
 /* end : HTML TEMPLATES */
+/* ######################*/
+
+/* ######################*/
+/* start : ACTIONS BUTTONS */
+
+    // ACTION : LEARN
+    // -> creates a button [Learn]
+    // -> AddEvent to the button
+    // -> The event modifies the 'target' html so as to show the 'learn' action
+    // -> 'target' is the id of the place where you'll show the [learn]
+    function learnAction(target, deck) {
+        var learnHTML = document.createElement('button');
+            learnHTML.className = 'btn';
+
+            // CONTENT
+            var learnIcon = document.createElement('span');
+                learnIcon.textContent = '学 ';
+                learnIcon.className = 'btn__icon';
+
+            var learnText = document.createElement('span');
+                learnText.textContent = 'learn';
+                learnText.className = 'btn__label';
+
+            learnHTML.appendChild(learnIcon);
+            learnHTML.appendChild(learnText);
+
+            // EVENT
+            learnHTML.addEventListener('click', function(e) {
+                var location = document.getElementById(target);
+                location.innerHTML = '';
+
+                location.appendChild(deck.showCardsOneByOne(deck));
+
+            }, false);
+
+        return learnHTML;
+    }
+
+    // ACTION : LEARN
+    // -> creates a button [Learn]
+    // -> AddEvent to the button
+    // -> The event modifies the 'target' html so as to show the 'learn' action
+    // -> 'target' is the id of the place where you'll show the [learn]
+    function addAction(target) {
+        var addHTML = document.createElement('button');
+            addHTML.className = 'btn';
+
+            // CONTENT
+            var addIcon = document.createElement('span');
+                addIcon.textContent = '十 ';
+                addIcon.className = 'btn__icon';
+
+            var addText = document.createElement('span');
+                addText.textContent = 'add';
+                addText.className = 'btn__label';
+
+            addHTML.appendChild(addIcon);
+            addHTML.appendChild(addText);
+
+            // EVENT
+            addHTML.addEventListener('click', function(e) {
+
+                var location = document.getElementById(target);
+                location.innerHTML = '';
+
+                location.appendChild(app.addCardsToDeck());
+
+            }, false);
+
+        return addHTML;
+    }
+
+
+/* end : ACTIONS BUTTONS */
 /* ######################*/
 
 /* ######################*/
@@ -434,3 +747,14 @@ function Card(chinese, pinyin, translation) {
     }
 /* stop : LOCALSTORAGE */
 /* ######################*/
+
+/* ###################### */
+/* GENERIC HELPER FUNCTIONS */
+
+//get a random integer between min and max
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+/* stop : GENERIC HELPER FUNCTIONS */
+/* ############################### */

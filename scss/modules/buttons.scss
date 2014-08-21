@@ -1,0 +1,23 @@
+/*------------------------------------*\
+    #BUTTONS
+
+    -> CODEPEN : http://codepen.io/Marekje/pen/lIwzn?editors=010
+    -> GITHUB  : https://gist.github.com/Marekje/58e8c9103af720e71905
+    (That buttons system should serve as a base for this one)
+\*------------------------------------*/
+
+.btn {
+    border: 1px solid $black;
+    background-color: $yellow;
+    color: $darkblue;
+}
+.btn__action {
+    display: block;
+    min-width: 4em;
+    min-height: 4em;
+    border-radius: 100%;
+}
+.btn__main-action {
+    background-color: $green;
+    color: $darkblue;
+}

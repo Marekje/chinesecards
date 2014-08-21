@@ -1,0 +1,25 @@
+html {
+    background-color: #222;
+    font-size: 100%;
+    font-size: 1rem;
+}
+body {
+    font-family: $font-maintext;
+    max-width: 20em;
+    background-color: $darkblue;
+}
+
+/*------------------------------------*\
+    #TYPOGRAPHY
+\*------------------------------------*/
+
+//Specific texts
+.text-code {font-family: $font-code; }
+.text-chinese { font-family: $font-chinese; }
+
+a {
+    color: $yellow;
+    &:hover {
+        color: $red;
+    }
+}

@@ -1,0 +1,12 @@
+/*
+    NAV module
+    -> styles pertaining to the main navigation element,
+        the menu on the top of the app.
+*/
+.mainnav h1,
+.mainnav ul,
+.mainnav li {
+  display: inline-block; }
+
+.mainnav ul {
+  float: right; }
