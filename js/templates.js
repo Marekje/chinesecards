@@ -24,14 +24,9 @@ var Plans = {
                 translationItem.className = 'card__translation';
                 translationItem.appendChild(cardItem3);
 
-            var editDiv = document.createElement('div');
-                editDiv.className = 'card__edit';
-                editDiv.appendChild(editButton);
-
             cardHTML.appendChild(chineseItem);
             cardHTML.appendChild(pinyinItem);
             cardHTML.appendChild(translationItem);
-            cardHTML.appendChild(editButton);
 
         return cardHTML;
     },

@@ -11,6 +11,7 @@
           previous function)
         - addCards (An empty Card, to be added only if filled)
 */
+"use strict";
 
 function Deck(name) {
 
@@ -27,30 +28,36 @@ function Deck(name) {
 
     /* LOOK AT CARDS
        Simply browse through the Cards, without changing anything */
-    this.lookAtCards = function() {
+    this.showCardsOneByOne = function(cardsState) {
 
         // VARIABLES
         var deckObject = this;
+        var state = cardsState ? cardsState : 'look';
 
         // HTML
         var lookHTML = document.createElement('section');
             lookHTML.className = 'deck__look';
 
-            var cardHTML = deckObject.cards[0].createHTML('look');
+            /* Card */
+            var cardLocation = document.createElement('div');
+                var cardHTML = deckObject.cards[0].createHTML(state);
+            cardLocation.appendChild(cardHTML);
 
+            /* Next button*/
             var nextButton = document.createElement('button');
                 nextButton.className = 'btn btn-next';
                 nextButton.textContent = 'Next';
 
-        lookHTML.appendChild(cardHTML);
+        lookHTML.appendChild(cardLocation);
         lookHTML.appendChild(nextButton);
 
         // BEHAVIORS
         nextButton.addEventListener('click', function(e) {
             var previousCard = deckObject.cards.shift();
             deckObject.cards.push(previousCard);
-            cardHTML = deckObject.cards[0].createHTML('look'); /* DOESN'T UPDATE THE HTML !!*/
-
+            var newCardHTML = deckObject.cards[0].createHTML(state); /* DOESN'T UPDATE THE HTML !!*/
+            cardLocation.innerHTML = '';
+            cardLocation.appendChild(newCardHTML);
             showAllDeck(deckObject);
         }, false);
 

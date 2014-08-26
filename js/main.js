@@ -1,3 +1,5 @@
+"use strict";
+
 document.addEventListener("DOMContentLoaded", function() {
     var mainDeck = new Deck('mainDeck');
 
@@ -18,13 +20,17 @@ document.addEventListener("DOMContentLoaded", function() {
     showAllDeck(mainDeck);
 
     var body = document.querySelector('body');
-    body.appendChild(mainDeck.lookAtCards());
+    body.appendChild(mainDeck.showCardsOneByOne('learn'));
 });
 
 function main() {
     console.log('Hello, world !');
 };
 
+/*
+    SHOW ALL DECK
+    Debugging function
+*/
 function showAllDeck(deck) {
     var showDeck = deck.name + ':';
     for (var i=0; i<deck.cards.length; i++) {
@@ -32,3 +38,12 @@ function showAllDeck(deck) {
     }
     console.log(showDeck);
 };
+
+/*
+    COMPARE NUMBERS
+    Array sorting function
+    -> http://devdocs.io/javascript/global_objects/array/sort
+*/
+function compareNumbers(a, b) {
+  return a - b;
+}

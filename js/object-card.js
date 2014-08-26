@@ -28,17 +28,57 @@ function Card(chinese, pinyin, translation) {
         // VARIABLES
         var cardObject = this;
         var state;
-        cardState ? state = cardState : state = 'BOF';
+        cardState ? state = cardState : state = 'look';
+        var chineseState, pinyinState, translationState;
+
+        if (cardState === 'look') {
+            chineseState = pinyinState = translationState = 'look';
+        } else if (cardState === 'edit') {
+            chineseState = pinyinState = translationState = 'edit';
+        } else if (cardState === 'learn') {
+
+            /* REDO IT USING ARRAY.SORT() */
+            /* I tried but couldn't figure out how to re-attribute the sorted
+               array to the var...*/
+
+            /* get last marks date for the three of them */
+            var chineseState = cardObject.chinese.marks[cardObject.chinese.marks.length-1];
+            var pinyinState = cardObject.pinyin.marks[cardObject.pinyin.marks.length-1];
+            var translationState = cardObject.translation.marks[cardObject.translation.marks.length-1];
+
+            if (chineseState < pinyinState || chineseState < translationState) {
+                console.log('chinese learn');
+                chineseState = 'learn';
+                pinyinState = translationState = 'look';
+            } else if (pinyinState < chineseState || pinyinState < translationState) {
+                console.log('pinyin learn');
+                pinyinState = 'learn';
+                chineseState = translationState = 'look';
+            } else if (translationState < chineseState || translationState < pinyinState) {
+                console.log('translation learn');
+                translationState = 'learn';
+                chineseState = pinyinState = 'look';
+            } else {
+                console.log('IDK learn, so chinese');
+                chineseState = 'learn';
+                pinyinState = translationState = 'look';
+            }
+            console.log(cardObject.chinese.marks);
+            console.log(cardObject.pinyin.marks);
+            console.log(cardObject.translation.marks);
+        } else {
+            chineseState = pinyinState = translationState = 'look';
+            console.log('Card.createHTML does not receive any cardState');
+        }
 
         var chineseHTML, pinyinHTML, translationHTML;
-        var editCard = Plans.editButton();
 
         // CREATE HTML
-        chineseHTML = this.chinese.createHTML('learn');
-        pinyinHTML = this.pinyin.createHTML('look');
-        translationHTML = this.translation.createHTML('look');
+        chineseHTML = this.chinese.createHTML(chineseState);
+        pinyinHTML = this.pinyin.createHTML(pinyinState);
+        translationHTML = this.translation.createHTML(translationState);
 
-        var cardHTML = Plans.card('card', state, chineseHTML, pinyinHTML, translationHTML, editCard);
+        var cardHTML = Plans.card('card', state, chineseHTML, pinyinHTML, translationHTML);
             cardHTML.setAttribute('data-state', state ? state : 'look');
 
         // ADD BEHAVIOR

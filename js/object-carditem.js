@@ -9,9 +9,9 @@ function CardItem(content) {
     this.question = 'I don\'t know.',
     this.marks = [0], /* the marks the item got : [0, 1, 3, 2, 1, 0, 1]
                          0 : 'not seen yet'
-                         1 : 'look'
-                         2 : 'right answer'
-                         3 : 'wrong answer' */
+                         1 : 'wrong answer'
+                         2 : 'look'
+                         3 : 'right answer' */
     this.marksDates = [Date.now()], /* the dates when the marks happened :
                                        [timestamp, timestamp, ...] */
 
@@ -45,27 +45,23 @@ function CardItem(content) {
         // CREATE VARIABLES ACCORDING TO STATE
         var itemObject = this;
 
-        var editability, editButtonContent,
-        answerVisibility, questionVisibility;
+        var editability, answerVisibility, questionVisibility;
 
         if (state === 'edit') {
             editability = true;
-            editButtonContent = 'Save';
             answerVisibility = 'visible';
             questionVisibility = 'hidden';
         } else if (state === 'learn') {
             editability = false;
-            editButtonContent = 'Edit';
             answerVisibility = 'hidden';
             questionVisibility = 'visible';
-            itemObject.updateMarks(2); /* add a good mark for this object,
+            itemObject.updateMarks(3); /* add a good mark for this object,
                                              see (a) for bad marks, */
         } else {
             editability = false;
-            editButtonContent = 'Edit';
             answerVisibility = 'visible';
             questionVisibility = 'hidden';
-            itemObject.updateMarks(1);
+            itemObject.updateMarks(2);
         }
 
         // CREATE HTML
@@ -90,7 +86,7 @@ function CardItem(content) {
         itemQuestion.addEventListener('click', function(e) {           /* (a) */
             itemQuestion.className = 'card-item__question hidden';
             itemAnswer.className = 'card-item__answer visible';
-            itemObject.updateMarks(3);
+            itemObject.updateMarks(1);
         }, false);
 
         /* When you click on an answer, it becomes editable */
