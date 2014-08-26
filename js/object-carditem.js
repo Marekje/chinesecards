@@ -1,17 +1,38 @@
 function CardItem(content) {
 
     /* PARAMS */
-    this.dateCrea = Date.now(), // the creation date
-    this.datesModif = [], //the last modif date
-    this.state = 'look';
+    this.dateCrea = Date.now(), /* the creation date */
+    this.datesModif = [], /* the last modif date */
 
     /* CONTENT */
-    this.content = content, // a string, such as "汉字" or "hanzi"
-    this.question = 'Guess it',
-    this.marks = [0], // the marks the item got : [1, 1, 2, 3, 4, 4, 4, 4, 5] (0 == not seen yet)
-    this.marksDates = [Date.now()], // the dates when the marks happened : [timestamp, timestamp, ...]
+    this.content = content, /* a string, such as "汉字" or "hanzi" */
+    this.question = 'I don\'t know.',
+    this.marks = [0], /* the marks the item got : [0, 1, 3, 2, 1, 0, 1]
+                         0 : 'not seen yet'
+                         1 : 'look'
+                         2 : 'right answer'
+                         3 : 'wrong answer' */
+    this.marksDates = [Date.now()], /* the dates when the marks happened :
+                                       [timestamp, timestamp, ...] */
 
-    /* METHODS */
+
+    /* UPDATE MARKS
+        We consider that the person has +1 mark as long as he/she doesn't click
+        on the answer.
+    */
+    this.updateMarks = function(number) {
+        var itemObject = this;
+        if (number === 3) {
+            itemObject.marks.pop();
+            itemObject.marks.push(number);
+            itemObject.marksDates.pop();
+            itemObject.marksDates.push(Date.now());
+        } else {
+            itemObject.marks.push(number);
+            itemObject.marksDates.push(Date.now());
+        }
+
+    }
 
     /* CREATEHTML */
     /*
@@ -20,90 +41,69 @@ function CardItem(content) {
         state : 'look', 'learn' & 'edit';
     */
     this.createHTML = function(state) {
+
+        // CREATE VARIABLES ACCORDING TO STATE
         var itemObject = this;
+
+        var editability, editButtonContent,
+        answerVisibility, questionVisibility;
+
+        if (state === 'edit') {
+            editability = true;
+            editButtonContent = 'Save';
+            answerVisibility = 'visible';
+            questionVisibility = 'hidden';
+        } else if (state === 'learn') {
+            editability = false;
+            editButtonContent = 'Edit';
+            answerVisibility = 'hidden';
+            questionVisibility = 'visible';
+            itemObject.updateMarks(2); /* add a good mark for this object,
+                                             see (a) for bad marks, */
+        } else {
+            editability = false;
+            editButtonContent = 'Edit';
+            answerVisibility = 'visible';
+            questionVisibility = 'hidden';
+            itemObject.updateMarks(1);
+        }
 
         // CREATE HTML
         var itemHTML = document.createElement('div');
             itemHTML.className = 'card-item';
-            itemHTML.setAttribute('data-state', 'look');          /* (CHANGE) */
-            itemHTML.setAttribute('contenteditable', false);
+            itemHTML.setAttribute('data-state', state);
 
-            var itemText = document.createElement('span');
-                itemText.className = 'card-item__text';
-                itemText.textContent = this.content; /* ONLY USED IF NO EVENT FIRED */
+            var itemAnswer = document.createElement('span');
+                itemAnswer.className = 'card-item__answer ' + answerVisibility;
+                itemAnswer.textContent = this.content;
+                itemAnswer.setAttribute('contenteditable', editability);
 
-            var itemEdit = document.createElement('button');
-                itemEdit.className = 'btn btn-edit';
-                itemEdit.textContent = 'Edit'; /* ONLY USED IF NO EVENT FIRED */
+            var itemQuestion = document.createElement('span');
+                itemQuestion.className = 'card-item__question ' + questionVisibility;
+                itemQuestion.textContent = this.question;
 
-        itemHTML.appendChild(itemText);
-        itemHTML.appendChild(itemEdit);
-
-        this.modifyAttributes(itemHTML, state);
+        itemHTML.appendChild(itemAnswer);
+        itemHTML.appendChild(itemQuestion);
 
         // ADD BEHAVIORS
-
-        /* WHEN DATA-STATE CHANGES */
-        itemHTML.addEventListener('change', function(e) {         /* (CHANGE) */
-
-/* DOESN'T WORK - YOU CAN'T LISTEN TO AN ATTRIBUTE THAT'S BEING MODIFIED !!! */
-
-            console.log('hello');
-
-            var dataState = this.getAttribute('data-state');
-
-            itemObject.modifyAttributes(dataStates);
-
-            console.log('The new data-state : ' + itemHTML.getAttribute( 'data-state'));
-
+        /* When you click on a question, it shows the answer & put a bad grade */
+        itemQuestion.addEventListener('click', function(e) {           /* (a) */
+            itemQuestion.className = 'card-item__question hidden';
+            itemAnswer.className = 'card-item__answer visible';
+            itemObject.updateMarks(3);
         }, false);
 
-        /* WHEN EDIT BUTTON IS CLICKED */
-        itemEdit.addEventListener('click', function(e) {
+        /* When you click on an answer, it becomes editable */
+        itemAnswer.addEventListener('click', function(e) {
+            itemAnswer.setAttribute('contenteditable', true);
+        }, false)
 
-            var dataState = itemHTML.getAttribute('data-state');
-            itemObject.modifyAttributes(itemHTML, dataState);
-
-            if (dataState === 'edit') {
-                itemHTML.setAttribute('data-state', 'look');
-                console.log('edit button : edit to look');
-            } else {
-                itemHTML.setAttribute('data-state', 'edit');
-                console.log('edit button : look or learn to edit');
-            }
-
-        }, false);
+        /* When you type in an answer, it updates the carditem */
+        itemAnswer.addEventListener('keyup', function(e) {
+            itemObject.content = this.textContent;
+        }, false)
 
         return itemHTML;
-    },
-
-    /* MODIFY ATTRIBUTES ACCORDING TO DATA-STATES (function) */
-    this.modifyAttributes = function(itemHTML, dataState) {
-
-        var itemText = itemHTML.querySelector('.card-item__text');
-
-        var itemEdit = itemHTML.querySelector('.btn-edit');
-
-        if (dataState === 'look') {
-            itemText.textContent = this.content;
-            itemText.setAttribute('contenteditable', false);
-            itemEdit.textContent = 'Edit';
-            console.log(itemHTML);
-        } else if (dataState === 'learn') {
-            itemText.textContent = this.question;
-            var answer = this.content;
-            itemText.addEventListener('click', function(e) {
-                this.textContent = answer;
-            }, false)
-            itemText.setAttribute('contenteditable', false);
-            itemEdit.textContent = 'Edit';
-            console.log(itemHTML);
-        } else if (dataState === 'edit') {
-            itemText.textContent = this.content;
-            itemText.setAttribute('contenteditable', true);
-            itemEdit.textContent = 'Look';
-            console.log(itemHTML);
-        }
     }
 
 }

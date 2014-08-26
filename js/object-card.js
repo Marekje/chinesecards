@@ -2,7 +2,9 @@ function Card(chinese, pinyin, translation) {
 
     /* PARAMS */
     this.dateCrea = Date.now(),
-    this.datesModif = [],
+    this.datesModif = [], /* ONLY EDIT MODIFICATION HERE.
+                             LEARNING MODIFICATIONS ARE LOGGED
+                             IN THE CARD ITEMS*/
 
     /* CONTENT */
     this.chinese = new CardItem(chinese),
@@ -11,7 +13,7 @@ function Card(chinese, pinyin, translation) {
 
     /* METHODS */
 
-    this.updateDatesModif = function() { this.datesModif.push(Date.now); },
+    this.lastModif = function() { this.datesModif.push(Date.now); },
 
     /* CREATEHTML */
     /*
@@ -21,18 +23,20 @@ function Card(chinese, pinyin, translation) {
         card states : 'look', 'learn', 'edit'
 
     */
-    this.createHTML = function(state) {
+    this.createHTML = function(cardState) {
 
         // VARIABLES
         var cardObject = this;
+        var state;
+        cardState ? state = cardState : state = 'BOF';
 
         var chineseHTML, pinyinHTML, translationHTML;
         var editCard = Plans.editButton();
 
         // CREATE HTML
-        chineseHTML = this.chinese.createHTML(false, false);
-        pinyinHTML = this.pinyin.createHTML(false, false);
-        translationHTML = this.translation.createHTML(false, false);
+        chineseHTML = this.chinese.createHTML('learn');
+        pinyinHTML = this.pinyin.createHTML('look');
+        translationHTML = this.translation.createHTML('look');
 
         var cardHTML = Plans.card('card', state, chineseHTML, pinyinHTML, translationHTML, editCard);
             cardHTML.setAttribute('data-state', state ? state : 'look');

@@ -75,6 +75,12 @@ a {
   a:hover {
     color: #ffa57f; }
 
+/*------------------------------------*\
+    #HELPERS
+\*------------------------------------*/
+.hidden {
+  display: none; }
+
 /* LAYOUT */
 /* MODULES */
 .card {
@@ -87,6 +93,19 @@ a {
 .card p {
   padding: 0.5em;
   margin: 0.5em; }
+
+.card-item__answer,
+.card-item__question,
+.card-item {
+  min-width: 3em;
+  padding: 0.3em;
+  margin: 0.1em; }
+
+.card-item__question {
+  color: #ffa57f; }
+
+.card [contenteditable='true'] {
+  background-color: rgba(24, 27, 39, 0.2); }
 
 /*
     NAV module

@@ -36,18 +36,6 @@ var Plans = {
         return cardHTML;
     },
 
-    /* CARD ITEM */
-    /*
-        an item, usually shown in a card
-        content : the item's text
-    */
-    cardItem : function(content) {
-        var itemHTML = document.createElement('div');
-            itemHTML.className = 'card__item';
-            itemHTML.textContent = content;
-
-        return itemHTML;
-    },
 
     /* BUTTON : EDIT
         states : 'fixed' || 'editable'

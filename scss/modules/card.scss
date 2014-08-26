@@ -13,3 +13,16 @@
     padding: 0.5em;
     margin: 0.5em;
 }
+.card-item__answer,
+.card-item__question,
+.card-item {
+    min-width: 3em;
+    padding: 0.3em;
+    margin: 0.1em;
+}
+.card-item__question {
+    color: $red;
+}
+.card [contenteditable='true'] {
+    background-color: rgba($black, 0.2);
+}
