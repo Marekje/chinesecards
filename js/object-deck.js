@@ -40,13 +40,10 @@ function Deck(name) {
 
             /* Card */
             var cardLocation = document.createElement('div');
-                var cardHTML = deckObject.cards[0].createHTML(state);
-            cardLocation.appendChild(cardHTML);
+            cardLocation.appendChild(deckObject.cards[0].createHTML(state));
 
             /* Next button*/
-            var nextButton = document.createElement('button');
-                nextButton.className = 'btn btn-next';
-                nextButton.textContent = 'Next';
+            var nextButton = Plans.button('next', 'Next');
 
         lookHTML.appendChild(cardLocation);
         lookHTML.appendChild(nextButton);
@@ -57,13 +54,11 @@ function Deck(name) {
 
             // ANALYSE THE LEARNED CARD
             if (state === 'learn') {
-                var badAnswer = previousCard.aWrongAnswer();
+                var badAnswer = previousCard.isAWrongAnswer();
                 if (badAnswer) {
                     deckObject.cards.splice(3, 0, previousCard);
-                    console.log('badAnswer');
                 } else {
                     deckObject.cards.push(previousCard);
-                    console.log('noBadAnswer');
                 }
             } else {
                 deckObject.cards.push(previousCard);
@@ -75,6 +70,51 @@ function Deck(name) {
         }, false);
 
         return lookHTML;
+    }
 
+
+    /* ADD CARDS ONE BY ONE */
+    this.addCardsOneByOne = function() {
+
+        // VARIABLES
+        var deckObject = this;
+        var newCard = new Card();
+            deckObject.cards.unshift(newCard);
+
+        // HTML
+        var addCardsHTML = document.createElement('section');
+            addCardsHTML.className = 'deck__look';
+
+            /* Card */
+            var cardLocation = document.createElement('div');
+            cardLocation.appendChild(newCard.createHTML('edit'));
+
+            /* Next button*/
+            var nextButton = Plans.button('next', 'Next');
+
+        addCardsHTML.appendChild(cardLocation);
+        addCardsHTML.appendChild(nextButton);
+
+        // BEHAVIORS
+        nextButton.addEventListener('click', function(e) {
+            var previousCard = deckObject.cards[0];
+            var emptyCard = previousCard.isAnEmptyCard();
+
+            // ANALYSE THE LEARNED CARD
+            if (!emptyCard) {
+                /* do nothing */
+                console.log('nothing done');
+            } else {
+                deckObject.cards.shift();
+                console.log('something done');
+            }
+            var newCard = new Card()
+            var newCardHTML = newCard.createHTML('edit'); /* DOESN'T UPDATE THE HTML !!*/
+            cardLocation.innerHTML = '';
+            cardLocation.appendChild(newCardHTML);
+            showAllDeck(deckObject);
+        }, false);
+
+        return addCardsHTML;
     }
 }

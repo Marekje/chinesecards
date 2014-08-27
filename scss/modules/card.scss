@@ -16,6 +16,7 @@
 .card-item__answer,
 .card-item__question,
 .card-item {
+    display: block; /* careful : .hidden{display: none !important } */
     min-width: 3em;
     padding: 0.3em;
     margin: 0.1em;

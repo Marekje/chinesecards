@@ -29,7 +29,7 @@ function Card(chinese, pinyin, translation) {
 
         return marks;
     }
-    this.aWrongAnswer = function() {
+    this.isAWrongAnswer = function() {
         var lastMarks = this.getLastMarks();
         var badAnswerExists = false;
 
@@ -40,6 +40,16 @@ function Card(chinese, pinyin, translation) {
         }
 
         return badAnswerExists;
+    }
+    this.isAnEmptyCard = function() {
+        if (previousCard.chinese.content
+            || previousCard.pinyin.content
+            || previousCard.translation.content) {
+            /* do nothing */
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /* CREATEHTML */

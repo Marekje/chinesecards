@@ -36,11 +36,16 @@ var Plans = {
         states : 'fixed' || 'editable'
     */
 
-    editButton : function() {
-        var editButtonHTML = document.createElement('button');
-            editButtonHTML.className = 'btn btn--edit';
-            editButtonHTML.textContent = 'inactive';
+    button : function(buttonClass, buttonName) {
+        var buttonHTML = document.createElement('button');
+            buttonHTML.className = 'btn btn--' + buttonClass;
+            buttonHTML.textContent = buttonName;
 
-        return editButtonHTML;
+        return buttonHTML;
     }
+
+    /* SHOW CARDS ONE BY ONE
+        a simple template allowing a card on the left and a next button on the
+        right, unless I changed the styles...
+    */
 }
