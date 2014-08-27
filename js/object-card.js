@@ -15,6 +15,33 @@ function Card(chinese, pinyin, translation) {
 
     this.lastModif = function() { this.datesModif.push(Date.now); },
 
+    /*
+        GET LAST MARKS
+        -> Get the last marks for all cardItems
+    */
+    this.getLastMarks = function() {
+
+        var chineseMark = this.chinese.marks[this.chinese.marks.length-1];
+        var pinyinMark = this.pinyin.marks[this.pinyin.marks.length-1];
+        var translationMark = this.translation.marks[this.translation.marks.length-1];
+
+        var marks = [chineseMark, pinyinMark, translationMark]
+
+        return marks;
+    }
+    this.aWrongAnswer = function() {
+        var lastMarks = this.getLastMarks();
+        var badAnswerExists = false;
+
+        for (i=0; i<lastMarks.length; i++) {
+            if (lastMarks[i] === 1) {
+                badAnswerExists = true;
+            }
+        }
+
+        return badAnswerExists;
+    }
+
     /* CREATEHTML */
     /*
         -> makes an HTML version of the Card
@@ -46,26 +73,27 @@ function Card(chinese, pinyin, translation) {
             var pinyinState = cardObject.pinyin.marks[cardObject.pinyin.marks.length-1];
             var translationState = cardObject.translation.marks[cardObject.translation.marks.length-1];
 
-            if (chineseState < pinyinState || chineseState < translationState) {
-                console.log('chinese learn');
+            if (chineseState === 0 || chineseState === 1 ) {
                 chineseState = 'learn';
                 pinyinState = translationState = 'look';
-            } else if (pinyinState < chineseState || pinyinState < translationState) {
-                console.log('pinyin learn');
+            } else if (pinyinState === 0 || pinyinState === 1 ) {
                 pinyinState = 'learn';
                 chineseState = translationState = 'look';
-            } else if (translationState < chineseState || translationState < pinyinState) {
-                console.log('translation learn');
+            } else if (translationState === 0 || translationState === 1 ) {
                 translationState = 'learn';
                 chineseState = pinyinState = 'look';
             } else {
-                console.log('IDK learn, so chinese');
-                chineseState = 'learn';
-                pinyinState = translationState = 'look';
+                /* Randomly choose one to learn : */
+                var randLearn = getRandomInt(1, 3);
+                chineseState = pinyinState = translationState = 'look';
+                if (randLearn === 1) {
+                    chineseState = 'learn';
+                } else if (randLearn === 2) {
+                    pinyinState = 'learn';
+                } else {
+                    translationState = 'learn';
+                }
             }
-            console.log(cardObject.chinese.marks);
-            console.log(cardObject.pinyin.marks);
-            console.log(cardObject.translation.marks);
         } else {
             chineseState = pinyinState = translationState = 'look';
             console.log('Card.createHTML does not receive any cardState');

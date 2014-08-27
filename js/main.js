@@ -34,7 +34,7 @@ function main() {
 function showAllDeck(deck) {
     var showDeck = deck.name + ':';
     for (var i=0; i<deck.cards.length; i++) {
-        showDeck += ' | ' + deck.cards[i].chinese.content;
+        showDeck += ' ' + deck.cards[i].chinese.content;
     }
     console.log(showDeck);
 };
@@ -46,4 +46,11 @@ function showAllDeck(deck) {
 */
 function compareNumbers(a, b) {
   return a - b;
+}
+/*
+    GET A RANDOM INTEGER
+    -> http://devdocs.io/javascript/global_objects/math/random
+*/
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }

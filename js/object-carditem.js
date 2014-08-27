@@ -22,7 +22,7 @@ function CardItem(content) {
     */
     this.updateMarks = function(number) {
         var itemObject = this;
-        if (number === 3) {
+        if (number === 1) {
             itemObject.marks.pop();
             itemObject.marks.push(number);
             itemObject.marksDates.pop();

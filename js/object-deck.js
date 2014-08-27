@@ -54,7 +54,20 @@ function Deck(name) {
         // BEHAVIORS
         nextButton.addEventListener('click', function(e) {
             var previousCard = deckObject.cards.shift();
-            deckObject.cards.push(previousCard);
+
+            // ANALYSE THE LEARNED CARD
+            if (state === 'learn') {
+                var badAnswer = previousCard.aWrongAnswer();
+                if (badAnswer) {
+                    deckObject.cards.splice(3, 0, previousCard);
+                    console.log('badAnswer');
+                } else {
+                    deckObject.cards.push(previousCard);
+                    console.log('noBadAnswer');
+                }
+            } else {
+                deckObject.cards.push(previousCard);
+            }
             var newCardHTML = deckObject.cards[0].createHTML(state); /* DOESN'T UPDATE THE HTML !!*/
             cardLocation.innerHTML = '';
             cardLocation.appendChild(newCardHTML);
@@ -63,21 +76,5 @@ function Deck(name) {
 
         return lookHTML;
 
-    },
-
-    /* LEARN CARDS
-       Look at cards one by one, hiding parts of it according to its
-       learning level. Put them back in the deck according to its
-       learning level & if you know it. */
-    this.learnCards = function() {
-
-    },
-
-    /* ADD CARDS
-       Add New Cards to this deck, one by one. */
-    this.addCards = function() {
-
     }
-
-
 }
