@@ -53,13 +53,33 @@ function App(location) {
             appHTML.className = 'container';
 
         /* Menu */
-        var menu = theApp.createMenuHTML();
+        var look  = Plans.button('action', 'Look');
+        var learn = Plans.button('action', 'Learn');
+        var add   = Plans.button('action', 'Add');
+
+        var menu = theApp.createMenuHTML([look, learn, add]);
 
         /* Main location*/
         var mainContent = theApp.createMainContentHTML();
 
         appHTML.appendChild(menu);
         appHTML.appendChild(mainContent);
+
+        look.addEventListener('click', function(e) {
+            theApp.decks[0].whatShouldIDo();
+            mainContent.innerHTML = '';
+            mainContent.appendChild(theApp.decks[0].showCardsOneByOne('look'));
+        }, false);
+        learn.addEventListener('click', function(e) {
+            theApp.decks[0].whatShouldIDo();
+            mainContent.innerHTML = '';
+            mainContent.appendChild(theApp.decks[0].showCardsOneByOne('learn'));
+        }, false);
+        add.addEventListener('click', function(e) {
+            theApp.decks[0].whatShouldIDo();
+            mainContent.innerHTML = '';
+            mainContent.appendChild(theApp.decks[0].addCardsOneByOne());
+        }, false);
 
         return appHTML;
     }
@@ -68,9 +88,24 @@ function App(location) {
         CREATE MENU HTML
         create a simple menu for switching between different actions
     */
-    this.createMenuHTML = function() {
+    this.createMenuHTML = function(buttons) {
         var menuHTML = document.createElement('nav');
-            menuHTML.textContent = 'MENU';
+            menuHTML.className = 'nav';
+
+            var logo = document.createElement('h1');
+                logo.className = 'nav__logo';
+                logo.textContent = '学习';
+
+            var list = document.createElement('ul');
+                list.className = 'nav__menu menu';
+
+                for (var i=0; i<buttons.length; i++) {
+                    list.appendChild(buttons[i]);
+                }
+
+            menuHTML.appendChild(logo);
+            menuHTML.appendChild(list);
+
         return menuHTML;
     }
 

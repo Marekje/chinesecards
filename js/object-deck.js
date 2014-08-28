@@ -23,6 +23,27 @@ function Deck(name) {
     /* CARDS */
     this.cards = [],
 
+    /* HELP METHODS */
+
+    /* WHAT SHOULD I DO WITH THE NEW CARD */
+    this.whatShouldIDo = function() {
+        var card = this.cards.shift();
+        var empty = card.isAnEmptyCard(); /* true if empty, false is not empty*/
+        var learnt = card.hasBeenSeen(); /* true if there is at least a 2 or 3 in the marks*/
+        var wrong = card.isAWrongAnswer(); /* true if an answer is bad (marks ===1 ) */
+
+        if (empty) {
+            /* Do Nothing */
+        } else if (!learnt) {
+            this.cards.unshift(card);
+        } else if (wrong) {
+            this.cards.splice(5, 0, card);
+        } else {
+            this.cards.push(card);
+        }
+    }
+
+
 
     /* MAIN FUNCTIONS - CREATES HTML */
 
@@ -50,19 +71,10 @@ function Deck(name) {
 
         // BEHAVIORS
         nextButton.addEventListener('click', function(e) {
-            var previousCard = deckObject.cards.shift();
+            deckObject.whatShouldIDo(); /* Does something to the previous card*/
 
             // ANALYSE THE LEARNED CARD
-            if (state === 'learn') {
-                var badAnswer = previousCard.isAWrongAnswer();
-                if (badAnswer) {
-                    deckObject.cards.splice(3, 0, previousCard);
-                } else {
-                    deckObject.cards.push(previousCard);
-                }
-            } else {
-                deckObject.cards.push(previousCard);
-            }
+
             var newCardHTML = deckObject.cards[0].createHTML(state); /* DOESN'T UPDATE THE HTML !!*/
             cardLocation.innerHTML = '';
             cardLocation.appendChild(newCardHTML);
@@ -97,19 +109,10 @@ function Deck(name) {
 
         // BEHAVIORS
         nextButton.addEventListener('click', function(e) {
-            var previousCard = deckObject.cards[0];
-            var emptyCard = previousCard.isAnEmptyCard();
-
-            // ANALYSE THE LEARNED CARD
-            if (!emptyCard) {
-                /* do nothing */
-                console.log('nothing done');
-            } else {
-                deckObject.cards.shift();
-                console.log('something done');
-            }
-            var newCard = new Card()
-            var newCardHTML = newCard.createHTML('edit'); /* DOESN'T UPDATE THE HTML !!*/
+            deckObject.whatShouldIDo(); /* Does something to the previous card*/
+            var newNewCard = new Card();
+            deckObject.cards.unshift(newNewCard);
+            var newCardHTML = newNewCard.createHTML('edit'); /* DOESN'T UPDATE THE HTML !!*/
             cardLocation.innerHTML = '';
             cardLocation.appendChild(newCardHTML);
             showAllDeck(deckObject);

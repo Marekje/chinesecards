@@ -28,7 +28,7 @@ function Card(chinese, pinyin, translation) {
         var marks = [chineseMark, pinyinMark, translationMark]
 
         return marks;
-    }
+    },
     this.isAWrongAnswer = function() {
         var lastMarks = this.getLastMarks();
         var badAnswerExists = false;
@@ -40,17 +40,27 @@ function Card(chinese, pinyin, translation) {
         }
 
         return badAnswerExists;
-    }
+    },
     this.isAnEmptyCard = function() {
-        if (previousCard.chinese.content
-            || previousCard.pinyin.content
-            || previousCard.translation.content) {
+        if (this.chinese.content
+            || this.pinyin.content
+            || this.translation.content) {
             /* do nothing */
             return false;
         } else {
             return true;
         }
-    }
+    },
+    this.hasBeenSeen = function() {
+        if (this.chinese.marks[this.chinese.marks.length-1] === 2
+            || this.pinyin.marks[this.pinyin.marks.length-1] === 2
+            || this.translation.marks[this.translation.marks.length-1] === 2) {
+            /* do nothing */
+            return true;
+        } else {
+            return false;
+        }
+    },
 
     /* CREATEHTML */
     /*
