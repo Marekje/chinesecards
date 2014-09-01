@@ -91,6 +91,7 @@ function CardItem(content) {
 
         /* When you click on an answer, it becomes editable */
         itemAnswer.addEventListener('click', function(e) {
+
             itemAnswer.setAttribute('contenteditable', true);
         }, false)
 

@@ -43,7 +43,8 @@ function App(location) {
         mainDeck.cards.push(card5);
         mainDeck.cards.push(card6);
 
-        theApp.decks.push(mainDeck);
+        //theApp.decks.push(mainDeck);
+        this.getDecksFromLS();
         showAllDeck(theApp.decks[0]);
 
         /* HTML BUILDING */
@@ -67,16 +68,19 @@ function App(location) {
 
         look.addEventListener('click', function(e) {
             theApp.decks[0].whatShouldIDo();
+            theApp.saveDecksToLS();
             mainContent.innerHTML = '';
             mainContent.appendChild(theApp.decks[0].showCardsOneByOne('look'));
         }, false);
         learn.addEventListener('click', function(e) {
             theApp.decks[0].whatShouldIDo();
+            theApp.saveDecksToLS();
             mainContent.innerHTML = '';
             mainContent.appendChild(theApp.decks[0].showCardsOneByOne('learn'));
         }, false);
         add.addEventListener('click', function(e) {
             theApp.decks[0].whatShouldIDo();
+            theApp.saveDecksToLS();
             mainContent.innerHTML = '';
             mainContent.appendChild(theApp.decks[0].addCardsOneByOne());
         }, false);
@@ -107,7 +111,7 @@ function App(location) {
             menuHTML.appendChild(list);
 
         return menuHTML;
-    }
+    },
 
 
     /*
@@ -121,10 +125,56 @@ function App(location) {
             contentHTML.appendChild(this.decks[0].addCardsOneByOne());
 
         return contentHTML;
-    }
+    },
 
     /* SAVE DECKS TO LOCALSTORAGE */
+    this.saveDecksToLS = function() {
+        var decksToSave = this.decks;
 
+        var decksNames = [];
+        var decksNamesJSON;
+        for (i=0; i<decksToSave.length; i++) {
+
+            decksNames.push(decksToSave[i].name);
+
+            var deckCardsJSON = JSON.stringify(decksToSave[i].cards);
+            localStorage.setItem(decksToSave[i].name, deckCardsJSON);
+        }
+
+        decksNamesJSON = JSON.stringify(decksNames);
+        localStorage.setItem('decksNames', decksNamesJSON);
+    },
 
     /* GET DECKS FROM LOCASTORAGE*/
+    this.getDecksFromLS = function() {
+        var decksNamesJSON = localStorage.getItem('decksNames');
+        var decksNames = JSON.parse(decksNamesJSON);
+        if (decksNames) {
+            for (var i=0; i<decksNames.length; i++) {
+                var deck = new Deck(decksNames[i]);
+                var deckCards = localStorage.getItem(decksNames[i]);
+                if (deckCards) {
+                    deckCards = JSON.parse(deckCards);
+                    console.log(deckCards[0])
+                    for (var i=0; i<deckCards.length; i++) {
+                        var card = new Card(deckCards[i].chinese, deckCards[i].pinyin, deckCards[i].translation);
+                        card.dateCrea = deckCard[i].dateCrea;
+                        card.datesModif = deckCard[i].datesModif;
+                        deck.cards.push(card);
+                        // CREATE A FUNCTION (in a Savers object) THAT CREATES A NEW CARD OBJECT FROM LOCALSTORAGE
+                        // CREATE A FUNCTION (in a Savers object) THAT CREATES A CARDITEM OBJECT FROM LOCALSTORAGE
+                    }
+                } else {
+                    deck.cards = [];
+                }
+                this.decks.push(deck);
+            }
+        } else {
+            var theDeck = new Deck('activeDeck');
+            console.log('LS empty');
+            this.decks.push(theDeck);
+        }
+    }
+
+
 }
