@@ -1,0 +1,11 @@
+/* DECK RELATED SCSS*/
+.deck__learn {
+  width: 100%; }
+  .deck__learn .deck__card,
+  .deck__learn .deck__toolbar {
+    display: inline-block; }
+  .deck__learn .deck__card {
+    width: 80%; }
+  .deck__learn .deck__toolbar {
+    float: right;
+    width: 18%; }

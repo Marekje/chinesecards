@@ -55,18 +55,22 @@ function Deck(name) {
 
         // HTML
         var lookHTML = document.createElement('section');
-            lookHTML.className = 'deck__look';
+            lookHTML.className = 'deck__learn';
 
             /* Card */
             var cardLocation = document.createElement('div');
+            cardLocation.className = 'deck__card';
             console.log(deckObject.cards[0]);
             cardLocation.appendChild(deckObject.cards[0].createHTML(state));
 
             /* Next button*/
-            var nextButton = Plans.button('next', 'Next');
+            var toolbar = document.createElement('div');
+                toolbar.className = 'deck__toolbar';
+                var nextButton = Plans.button('action', 'Next');
+            toolbar.appendChild(nextButton);
 
         lookHTML.appendChild(cardLocation);
-        lookHTML.appendChild(nextButton);
+        lookHTML.appendChild(toolbar);
 
         // BEHAVIORS
         nextButton.addEventListener('click', function(e) {
@@ -94,17 +98,21 @@ function Deck(name) {
 
         // HTML
         var addCardsHTML = document.createElement('section');
-            addCardsHTML.className = 'deck__look';
+            addCardsHTML.className = 'deck__learn';
 
             /* Card */
             var cardLocation = document.createElement('div');
+            cardLocation.className = 'deck__card';
             cardLocation.appendChild(newCard.createHTML('edit'));
 
             /* Next button*/
-            var nextButton = Plans.button('next', 'Next');
+            var toolbar = document.createElement('div');
+                toolbar.className = 'deck__toolbar';
+                var nextButton = Plans.button('action', 'Next');
+            toolbar.appendChild(nextButton);
 
         addCardsHTML.appendChild(cardLocation);
-        addCardsHTML.appendChild(nextButton);
+        addCardsHTML.appendChild(toolbar);
 
         // BEHAVIORS
         nextButton.addEventListener('click', function(e) {

@@ -105,7 +105,7 @@ function App(location) {
         var contentHTML = document.createElement('section');
 
             //contentHTML.appendChild(this.decks[0].showCardsOneByOne('look'));
-            contentHTML.appendChild(this.decks[0].addCardsOneByOne());
+            contentHTML.appendChild(this.decks[0].showCardsOneByOne('learn'));
 
         return contentHTML;
     },

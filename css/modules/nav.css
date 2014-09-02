@@ -1,21 +1,20 @@
 /*
-Syntax error: Undefined variable: "$white".
-        on line 8 of scss/modules/nav.scss
+Syntax error: Undefined variable: "$font-chinese".
+        on line 17 of scss/modules/nav.scss
 
-3:     -> styles pertaining to the main navigation element,
-4:         the menu on the top of the app.
-5: *\/
-6: 
-7: .mainnav {
-8:     color: $white;
-9: }
-10: .mainnav h1,
-11: .mainnav ul,
-12: .mainnav li {
-13:     display: inline-block;
+12: .nav__menu {
+13:     float: right;
+14: }
+15: 
+16: .nav__logo {
+17:     font-family: $font-chinese;
+18:     font-weight: 100;
+19:     font-size: $fontscale-2+em;
+20:     color: $color-accent;
+21: }
 
 Backtrace:
-scss/modules/nav.scss:8
+scss/modules/nav.scss:17
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/script/tree/variable.rb:49:in `_perform'
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/script/tree/node.rb:50:in `perform'
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/tree/visitors/perform.rb:366:in `visit_prop'
@@ -54,19 +53,17 @@ scss/modules/nav.scss:8
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/plugin/compiler.rb:189:in `block in update_stylesheets'
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/plugin/compiler.rb:186:in `each'
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/plugin/compiler.rb:186:in `update_stylesheets'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/plugin/compiler.rb:221:in `watch'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/plugin.rb:108:in `method_missing'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/exec.rb:509:in `watch_or_update'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/exec.rb:346:in `process_result'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/exec.rb:43:in `parse'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/exec.rb:22:in `parse!'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/bin/sass:13:in `<top (required)>'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/bin/sass:23:in `load'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/bin/sass:23:in `<main>'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/bin/ruby_noexec_wrapper:14:in `eval'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/bin/ruby_noexec_wrapper:14:in `<main>'
+/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/plugin/compiler.rb:357:in `on_file_changed'
+/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/plugin/compiler.rb:250:in `block in watch'
+/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/vendor/listen/lib/listen/listener.rb:252:in `call'
+/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/vendor/listen/lib/listen/listener.rb:252:in `on_change'
+/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/vendor/listen/lib/listen/listener.rb:290:in `block in initialize_adapter'
+/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/vendor/listen/lib/listen/adapter.rb:254:in `call'
+/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/vendor/listen/lib/listen/adapter.rb:254:in `report_changes'
+/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/vendor/listen/lib/listen/adapter.rb:323:in `poll_changed_directories'
+/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/vendor/listen/lib/listen/adapter.rb:299:in `block in start_poller'
 */
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined variable: \"$white\".\A         on line 8 of scss/modules/nav.scss\A \A 3:     -> styles pertaining to the main navigation element,\A 4:         the menu on the top of the app.\A 5: */\A 6: \A 7: .mainnav {\A 8:     color: $white;\A 9: }\A 10: .mainnav h1,\A 11: .mainnav ul,\A 12: .mainnav li {\A 13:     display: inline-block;"; }
+  content: "Syntax error: Undefined variable: \"$font-chinese\".\A         on line 17 of scss/modules/nav.scss\A \A 12: .nav__menu {\A 13:     float: right;\A 14: }\A 15: \A 16: .nav__logo {\A 17:     font-family: $font-chinese;\A 18:     font-weight: 100;\A 19:     font-size: $fontscale-2+em;\A 20:     color: $color-accent;\A 21: }"; }

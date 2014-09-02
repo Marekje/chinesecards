@@ -6,6 +6,9 @@
 /* VENDORS */
 @import "vendors/reset";
 
+/* FONTS */
+@import "vendors/noto";
+
 /* BASE */
 @import "variables/variables";
 @import "base/base";
@@ -13,6 +16,7 @@
 /* LAYOUT */
 
 /* MODULES */
+@import "modules/deck";
 @import "modules/card";
 @import "modules/nav";
 @import "modules/buttons";
