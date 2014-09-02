@@ -60,8 +60,8 @@ function Deck(name) {
             /* Card */
             var cardLocation = document.createElement('div');
             cardLocation.className = 'deck__card';
-            console.log(deckObject.cards[0]);
-            cardLocation.appendChild(deckObject.cards[0].createHTML(state));
+            var cardToShow = deckObject.cards[0];
+            cardLocation.appendChild(cardToShow.createHTML(state));
 
             /* Next button*/
             var toolbar = document.createElement('div');
