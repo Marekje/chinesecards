@@ -1,26 +1,22 @@
 /*
-Syntax error: Undefined variable: "$black".
-        on line 6 of scss/modules/card.scss
+Syntax error: Undefined variable: "$white".
+        on line 8 of scss/modules/nav.scss
 
-1: .card {
-2:     float: left;
-3: 
-4:     padding: 0.5em;
-5: 
-6:     border: 2px solid $black;
-7: 
-8:     background-color: $white;
-9: 
-10:     font-size: 2rem;
-11: }
+3:     -> styles pertaining to the main navigation element,
+4:         the menu on the top of the app.
+5: *\/
+6: 
+7: .mainnav {
+8:     color: $white;
+9: }
+10: .mainnav h1,
+11: .mainnav ul,
+12: .mainnav li {
+13:     display: inline-block;
 
 Backtrace:
-scss/modules/card.scss:6
+scss/modules/nav.scss:8
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/script/tree/variable.rb:49:in `_perform'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/script/tree/node.rb:50:in `perform'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/script/tree/list_literal.rb:62:in `block in _perform'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/script/tree/list_literal.rb:62:in `map'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/script/tree/list_literal.rb:62:in `_perform'
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/script/tree/node.rb:50:in `perform'
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/tree/visitors/perform.rb:366:in `visit_prop'
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/tree/visitors/base.rb:36:in `visit'
@@ -58,17 +54,19 @@ scss/modules/card.scss:6
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/plugin/compiler.rb:189:in `block in update_stylesheets'
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/plugin/compiler.rb:186:in `each'
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/plugin/compiler.rb:186:in `update_stylesheets'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/plugin/compiler.rb:357:in `on_file_changed'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/plugin/compiler.rb:250:in `block in watch'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/vendor/listen/lib/listen/listener.rb:252:in `call'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/vendor/listen/lib/listen/listener.rb:252:in `on_change'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/vendor/listen/lib/listen/listener.rb:290:in `block in initialize_adapter'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/vendor/listen/lib/listen/adapter.rb:254:in `call'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/vendor/listen/lib/listen/adapter.rb:254:in `report_changes'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/vendor/listen/lib/listen/adapter.rb:323:in `poll_changed_directories'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/vendor/listen/lib/listen/adapter.rb:299:in `block in start_poller'
+/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/plugin/compiler.rb:221:in `watch'
+/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/plugin.rb:108:in `method_missing'
+/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/exec.rb:509:in `watch_or_update'
+/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/exec.rb:346:in `process_result'
+/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/exec.rb:43:in `parse'
+/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/exec.rb:22:in `parse!'
+/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/bin/sass:13:in `<top (required)>'
+/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/bin/sass:23:in `load'
+/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/bin/sass:23:in `<main>'
+/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/bin/ruby_noexec_wrapper:14:in `eval'
+/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/bin/ruby_noexec_wrapper:14:in `<main>'
 */
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined variable: \"$black\".\A         on line 6 of scss/modules/card.scss\A \A 1: .card {\A 2:     float: left;\A 3: \A 4:     padding: 0.5em;\A 5: \A 6:     border: 2px solid $black;\A 7: \A 8:     background-color: $white;\A 9: \A 10:     font-size: 2rem;\A 11: }"; }
+  content: "Syntax error: Undefined variable: \"$white\".\A         on line 8 of scss/modules/nav.scss\A \A 3:     -> styles pertaining to the main navigation element,\A 4:         the menu on the top of the app.\A 5: */\A 6: \A 7: .mainnav {\A 8:     color: $white;\A 9: }\A 10: .mainnav h1,\A 11: .mainnav ul,\A 12: .mainnav li {\A 13:     display: inline-block;"; }

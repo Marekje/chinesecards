@@ -7,11 +7,15 @@
 @import "vendors/reset";
 
 /* BASE */
+@import "variables/variables";
+@import "base/base";
 
 /* LAYOUT */
 
 /* MODULES */
-@import "modules/card"
+@import "modules/card";
+@import "modules/nav";
+@import "modules/buttons";
 
 /* STATES */
 

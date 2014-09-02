@@ -1,26 +1,22 @@
 /*
-Syntax error: Undefined variable: "$black".
-        on line 6 of scss/modules/card.scss
+Syntax error: Undefined variable: "$font-maintext".
+        on line 7 of scss/base/base.scss
 
-1: .card {
-2:     float: left;
-3: 
-4:     padding: 0.5em;
-5: 
-6:     border: 2px solid $black;
-7: 
-8:     background-color: $white;
-9: 
-10:     font-size: 2rem;
-11: }
+2:     background-color: #222;
+3:     font-size: 100%;
+4:     font-size: 1rem;
+5: }
+6: body {
+7:     font-family: $font-maintext;
+8:     max-width: 20em;
+9:     background-color: $darkblue;
+10: }
+11: 
+12: /*------------------------------------*\
 
 Backtrace:
-scss/modules/card.scss:6
+scss/base/base.scss:7
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/script/tree/variable.rb:49:in `_perform'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/script/tree/node.rb:50:in `perform'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/script/tree/list_literal.rb:62:in `block in _perform'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/script/tree/list_literal.rb:62:in `map'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/script/tree/list_literal.rb:62:in `_perform'
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/script/tree/node.rb:50:in `perform'
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/tree/visitors/perform.rb:366:in `visit_prop'
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/tree/visitors/base.rb:36:in `visit'
@@ -71,4 +67,4 @@ scss/modules/card.scss:6
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined variable: \"$black\".\A         on line 6 of scss/modules/card.scss\A \A 1: .card {\A 2:     float: left;\A 3: \A 4:     padding: 0.5em;\A 5: \A 6:     border: 2px solid $black;\A 7: \A 8:     background-color: $white;\A 9: \A 10:     font-size: 2rem;\A 11: }"; }
+  content: "Syntax error: Undefined variable: \"$font-maintext\".\A         on line 7 of scss/base/base.scss\A \A 2:     background-color: #222;\A 3:     font-size: 100%;\A 4:     font-size: 1rem;\A 5: }\A 6: body {\A 7:     font-family: $font-maintext;\A 8:     max-width: 20em;\A 9:     background-color: $darkblue;\A 10: }\A 11: \A 12: /*------------------------------------*\"; }
