@@ -43,8 +43,6 @@ function Deck(name) {
         }
     }
 
-
-
     /* MAIN FUNCTIONS - CREATES HTML */
 
     /* LOOK AT CARDS
@@ -61,6 +59,7 @@ function Deck(name) {
 
             /* Card */
             var cardLocation = document.createElement('div');
+            console.log(deckObject.cards[0]);
             cardLocation.appendChild(deckObject.cards[0].createHTML(state));
 
             /* Next button*/

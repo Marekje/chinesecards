@@ -1,18 +1,29 @@
-function CardItem(content) {
+/* CARDITEM object
+    function CardItem(
+        content: a string
+        dateCrea: a timestamp
+        datesModif: an array of timestamps
+        question: a string
+        marks: an array of numbers
+        marksDates: an array of timestamps
+    )
+*/
+
+function CardItem(content, dateCrea, datesModif, question, marks, marksDates) {
 
     /* PARAMS */
-    this.dateCrea = Date.now(), /* the creation date */
-    this.datesModif = [], /* the last modif date */
+    this.dateCrea = dateCrea ? dateCrea : Date.now(), /* the creation date */
+    this.datesModif = datesModif ? datesModif : [], /* the last modif date */
 
     /* CONTENT */
-    this.content = content, /* a string, such as "汉字" or "hanzi" */
-    this.question = 'I don\'t know.',
-    this.marks = [0], /* the marks the item got : [0, 1, 3, 2, 1, 0, 1]
+    this.content = content ? content : undefined, /* a string, such as "汉字" or "hanzi" */
+    this.question = question? question : 'I don\'t know.',
+    this.marks = marks ? marks : [0], /* the marks the item got : [0, 1, 3, 2, 1, 0, 1]
                          0 : 'not seen yet'
                          1 : 'wrong answer'
                          2 : 'look'
                          3 : 'right answer' */
-    this.marksDates = [Date.now()], /* the dates when the marks happened :
+    this.marksDates = marksDates ? marksDates : [Date.now()], /* the dates when the marks happened :
                                        [timestamp, timestamp, ...] */
 
 

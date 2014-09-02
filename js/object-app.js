@@ -26,23 +26,6 @@ function App(location) {
         var theApp = this;
         var location = theApp.location;
 
-        /* BASIC CONTENT */
-        var mainDeck = new Deck('mainDeck');
-
-        var card1 = new Card('一个人', 'yi ge ren', 'one person');
-        var card2 = new Card('两个人', 'liang ge ren', 'two people');
-        var card3 = new Card('三个人', 'san ge ren', 'three people');
-        var card4 = new Card('四个人', 'si ge ren', 'four people');
-        var card5 = new Card('五个人', 'wu ge ren', 'five people');
-        var card6 = new Card('六个人', 'liu ge ren', 'six people');
-
-        mainDeck.cards.push(card1);
-        mainDeck.cards.push(card2);
-        mainDeck.cards.push(card3);
-        mainDeck.cards.push(card4);
-        mainDeck.cards.push(card5);
-        mainDeck.cards.push(card6);
-
         //theApp.decks.push(mainDeck);
         this.getDecksFromLS();
         showAllDeck(theApp.decks[0]);
@@ -147,6 +130,7 @@ function App(location) {
 
     /* GET DECKS FROM LOCASTORAGE*/
     this.getDecksFromLS = function() {
+        var theApp = this;
         var decksNamesJSON = localStorage.getItem('decksNames');
         var decksNames = JSON.parse(decksNamesJSON);
         if (decksNames) {
@@ -155,14 +139,10 @@ function App(location) {
                 var deckCards = localStorage.getItem(decksNames[i]);
                 if (deckCards) {
                     deckCards = JSON.parse(deckCards);
-                    console.log(deckCards[0])
                     for (var i=0; i<deckCards.length; i++) {
-                        var card = new Card(deckCards[i].chinese, deckCards[i].pinyin, deckCards[i].translation);
-                        card.dateCrea = deckCard[i].dateCrea;
-                        card.datesModif = deckCard[i].datesModif;
+                        var card = theApp.createCardFromArray(deckCards[i]);
+                        console.log(card);
                         deck.cards.push(card);
-                        // CREATE A FUNCTION (in a Savers object) THAT CREATES A NEW CARD OBJECT FROM LOCALSTORAGE
-                        // CREATE A FUNCTION (in a Savers object) THAT CREATES A CARDITEM OBJECT FROM LOCALSTORAGE
                     }
                 } else {
                     deck.cards = [];
@@ -174,6 +154,35 @@ function App(location) {
             console.log('LS empty');
             this.decks.push(theDeck);
         }
+    },
+
+    /* SET CARD FROM AN ARRAY OF VALUES
+        such as when you get a card back from localStorage
+        -> gets an array
+        -> gives back a card
+    */
+    this.createCardFromArray = function(cardArray) {
+        var card;
+        var cardCrea = cardArray.dateCrea;
+        var cardDatesModif = cardArray.datesModif;
+        card = new Card(undefined, undefined, undefined, cardCrea, cardDatesModif);
+
+        var cardItems = [cardArray.chinese, cardArray.pinyin, cardArray.translation];
+
+        for (var i=0; i<cardItems.length; i++) {
+            var cardIContent = cardItems[i].content;
+            var cardICrea = cardItems[i].dateCrea;
+            var cardIModif = cardItems[i].datesModif;
+            var cardIMarks = cardItems[i].marks;
+            var cardIMarksDates = cardItems[i].marksDates;
+            cardItems[i] = new CardItem(cardIContent, cardICrea, cardIModif, undefined, cardIMarks, cardIMarksDates);
+        }
+
+        card.chinese = cardItems[0];
+        card.pinyin = cardItems[1];
+        card.translation = cardItems[2];
+
+        return card;
     }
 
 

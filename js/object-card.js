@@ -1,15 +1,23 @@
-function Card(chinese, pinyin, translation) {
+/* CARD object
+    function Card(
+        chinese : a CardItem object
+        pinyin: a CardItem object
+        translation: a CardItem object
+        dateCrea : a timestamp
+        datesModif : an array of timestamps
+    )
+*/
+
+function Card(chinese, pinyin, translation, dateCrea, datesModif) {
 
     /* PARAMS */
-    this.dateCrea = Date.now(),
-    this.datesModif = [], /* ONLY EDIT MODIFICATION HERE.
-                             LEARNING MODIFICATIONS ARE LOGGED
-                             IN THE CARD ITEMS*/
+    this.dateCrea = dateCrea ? dateCrea : Date.now(),
+    this.datesModif = datesModif ? datesModif : [],
 
     /* CONTENT */
-    this.chinese = new CardItem(chinese),
-    this.pinyin = new CardItem(pinyin),
-    this.translation = new CardItem(translation),
+    this.chinese = chinese ? chinese : new CardItem(),
+    this.pinyin = pinyin ? pinyin : new CardItem(),
+    this.translation = translation ? translation : new CardItem(),
 
     /* METHODS */
 
