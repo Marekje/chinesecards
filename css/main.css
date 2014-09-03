@@ -61,7 +61,7 @@ body {
   max-width: 20em;
   margin: auto;
   background-color: #323951;
-  font-family: "calluna", "宋体", Georgia, "Times New Roman", "KaiTi", "楷体", STKaiti, "华文楷体", serif;
+  font-family: "Museo Slab", "宋体", Georgia, "Times New Roman", "KaiTi", "楷体", STKaiti, "华文楷体", serif;
   color: #eeece0; }
 
 /*------------------------------------*\
@@ -71,7 +71,7 @@ body {
   font-family: "Anonymous Pro", "Courier New", Courier; }
 
 .text-chinese {
-  font-family: "calluna", "宋体", Georgia, "Times New Roman", "KaiTi", "楷体", STKaiti, "华文楷体", serif; }
+  font-family: "Museo Slab", "宋体", Georgia, "Times New Roman", "KaiTi", "楷体", STKaiti, "华文楷体", serif; }
 
 a {
   color: #ffed90; }
@@ -107,6 +107,10 @@ a {
   padding: 0.5em;
   margin: 0.5em; }
 
+.card__chinese .card-item__answer,
+.card__chinese .card-item__question {
+  font-size: 1.5em; }
+
 .card-item__answer,
 .card-item__question,
 .card-item {
@@ -135,7 +139,7 @@ nav > * {
   float: right; }
 
 .nav__logo {
-  font-family: "calluna", "宋体", Georgia, "Times New Roman", "KaiTi", "楷体", STKaiti, "华文楷体", serif;
+  font-family: "Museo Slab", "宋体", Georgia, "Times New Roman", "KaiTi", "楷体", STKaiti, "华文楷体", serif;
   font-weight: 100;
   font-size: 1.2em;
   color: #ffed90; }
