@@ -1,12 +1,16 @@
 html {
-    background-color: #222;
+    background-color: $black;
     font-size: 100%;
     font-size: 1rem;
 }
 body {
-    font-family: $font-maintext;
     max-width: 20em;
-    background-color: $darkblue;
+    margin: auto;
+
+    background-color: $color-background;
+
+    font-family: $font-maintext;
+    color: $color-text;
 }
 
 /*------------------------------------*\
@@ -18,9 +22,9 @@ body {
 .text-chinese { font-family: $font-chinese; }
 
 a {
-    color: $yellow;
+    color: $color-links;
     &:hover {
-        color: $red;
+        color: $color-links--hover;
     }
 }
 

@@ -1,17 +1,37 @@
-// COLORS
+// COLOR SCHEME
 $darkblue: #323951;
-$white: #EEECE0;
 $red: #FFA57F;
 $green: #A8D46F;
-
 $yellow: #FFED90;
 $lightblue: #95A7E2;
+$white: #EEECE0;
 $black: #181B27;
 
 $transparent-darkblue: rgba($darkblue, 0.5);
 
-
-// FONTS
-$font-chinese: 'Noto sans', Verdana;
-$font-maintext: 'Chaparral', 'Chaparral Pro', 'Noto sans', Georgia, serif;
+// FONT SCHEME
+$font-chinese: 'calluna', "宋体", Georgia, "Times New Roman", "KaiTi", "楷体", STKaiti, "华文楷体", serif;
+//  from http://www.kendraschaefer.com/2012/06/chinese-standard-web-fonts-the-ultimate-guide-to-css-font-family-declarations-for-web-design-in-simplified-chinese/
+$font-maintext: 'calluna', "宋体", Georgia, "Times New Roman", "KaiTi", "楷体", STKaiti, "华文楷体", serif;
 $font-code: 'Anonymous Pro', 'Courier New', Courier;
+
+// COLORS
+$color-main: $lightblue;
+$color-accent: $yellow;
+$color-background: $darkblue;
+$color-action: $green;
+
+$card_color-background: $yellow;
+$card_color-text: $black;
+$card_color-question: $red;
+
+$color-text: $white;
+$color-titles: $lightblue;
+$color-links: $yellow;
+$color-links--hover: $lightblue;
+
+// SCALES
+$fontscale-1: 1;
+$fontscale-2: 1.2;
+$fontscale-3: 1.6;
+$fontscale-4: 2.4;

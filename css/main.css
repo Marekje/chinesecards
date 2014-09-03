@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*
     COMPILE SCSS :
     -> sass --watch scss:css
@@ -52,14 +53,16 @@ table {
 
 /* BASE */
 html {
-  background-color: #222;
+  background-color: #181b27;
   font-size: 100%;
   font-size: 1rem; }
 
 body {
-  font-family: "Chaparral", "Chaparral Pro", "Noto sans", Georgia, serif;
   max-width: 20em;
-  background-color: #323951; }
+  margin: auto;
+  background-color: #323951;
+  font-family: "calluna", "宋体", Georgia, "Times New Roman", "KaiTi", "楷体", STKaiti, "华文楷体", serif;
+  color: #eeece0; }
 
 /*------------------------------------*\
     #TYPOGRAPHY
@@ -68,12 +71,12 @@ body {
   font-family: "Anonymous Pro", "Courier New", Courier; }
 
 .text-chinese {
-  font-family: "Noto sans", Verdana; }
+  font-family: "calluna", "宋体", Georgia, "Times New Roman", "KaiTi", "楷体", STKaiti, "华文楷体", serif; }
 
 a {
   color: #ffed90; }
   a:hover {
-    color: #ffa57f; }
+    color: #95a7e2; }
 
 /*------------------------------------*\
     #HELPERS
@@ -83,11 +86,21 @@ a {
 
 /* LAYOUT */
 /* MODULES */
+/* DECK RELATED SCSS*/
+.deck__learn {
+  width: 100%; }
+  .deck__learn .deck__card,
+  .deck__learn .deck__toolbar {
+    display: inline-block; }
+  .deck__learn .deck__card {
+    width: 80%; }
+  .deck__learn .deck__toolbar {
+    float: right;
+    width: 18%; }
+
 .card {
-  float: left;
-  padding: 0.5em;
-  border: 2px solid #181b27;
-  background-color: #eeece0;
+  background-color: #ffed90;
+  color: #181b27;
   font-size: 2rem; }
 
 .card p {
@@ -114,19 +127,18 @@ a {
     -> styles pertaining to the main navigation element,
         the menu on the top of the app.
 */
-.mainnav {
-  color: #eeece0; }
+nav > * {
+  display: inline-block;
+  padding: 0.4em; }
 
-.mainnav h1,
-.mainnav ul,
-.mainnav li {
-  display: inline-block; }
-
-.mainnav h1 {
-  color: #eeece0; }
-
-.mainnav ul {
+.nav__menu {
   float: right; }
+
+.nav__logo {
+  font-family: "calluna", "宋体", Georgia, "Times New Roman", "KaiTi", "楷体", STKaiti, "华文楷体", serif;
+  font-weight: 100;
+  font-size: 1.2em;
+  color: #ffed90; }
 
 /*------------------------------------*\
     #BUTTONS
@@ -140,15 +152,11 @@ a {
   background-color: #ffed90;
   color: #323951; }
 
-.btn__action {
-  display: block;
+.btn--action {
   min-width: 4em;
   min-height: 4em;
-  border-radius: 100%; }
-
-.btn__main-action {
-  background-color: #a8d46f;
-  color: #323951; }
+  border-radius: 0.2em;
+  background-color: #a8d46f; }
 
 /* STATES */
 /* BASE */

@@ -17,7 +17,7 @@ function CardItem(content, dateCrea, datesModif, question, marks, marksDates) {
 
     /* CONTENT */
     this.content = content ? content : undefined, /* a string, such as "汉字" or "hanzi" */
-    this.question = question? question : 'I don\'t know.',
+    this.question = question ? question : 'I don\'t know.',
     this.marks = marks ? marks : [0], /* the marks the item got : [0, 1, 3, 2, 1, 0, 1]
                          0 : 'not seen yet'
                          1 : 'wrong answer'

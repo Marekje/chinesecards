@@ -11,13 +11,10 @@
     background-color: $yellow;
     color: $darkblue;
 }
-.btn__action {
-    display: block;
+.btn--action {
     min-width: 4em;
     min-height: 4em;
-    border-radius: 100%;
-}
-.btn__main-action {
-    background-color: $green;
-    color: $darkblue;
+    border-radius: 0.2em;
+
+    background-color: $color-action;
 }
