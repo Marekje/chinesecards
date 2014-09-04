@@ -37,11 +37,10 @@ function App(location) {
             appHTML.className = 'container';
 
         /* Menu */
-        var look  = Plans.button('action', 'Look');
         var learn = Plans.button('action', 'Learn');
         var add   = Plans.button('action', 'Add');
 
-        var menu = theApp.createMenuHTML([look, learn, add]);
+        var menu = theApp.createMenuHTML([learn, add]);
 
         /* Main location*/
         var mainContent = theApp.createMainContentHTML();
@@ -49,12 +48,6 @@ function App(location) {
         appHTML.appendChild(menu);
         appHTML.appendChild(mainContent);
 
-        look.addEventListener('click', function(e) {
-            theApp.decks[0].whatShouldIDo();
-            theApp.saveDecksToLS();
-            mainContent.innerHTML = '';
-            mainContent.appendChild(theApp.decks[0].showCardsOneByOne('look'));
-        }, false);
         learn.addEventListener('click', function(e) {
             theApp.decks[0].whatShouldIDo();
             theApp.saveDecksToLS();
@@ -65,7 +58,7 @@ function App(location) {
             theApp.decks[0].whatShouldIDo();
             theApp.saveDecksToLS();
             mainContent.innerHTML = '';
-            mainContent.appendChild(theApp.decks[0].addCardsOneByOne());
+            mainContent.appendChild(theApp.decks[0].showCardsOneByOne('edit'));
         }, false);
 
         return appHTML;
@@ -104,8 +97,7 @@ function App(location) {
     this.createMainContentHTML = function() {
         var contentHTML = document.createElement('section');
 
-            //contentHTML.appendChild(this.decks[0].showCardsOneByOne('look'));
-            contentHTML.appendChild(this.decks[0].addCardsOneByOne());
+            contentHTML.appendChild(this.decks[0].showCardsOneByOne('learn'));
 
         return contentHTML;
     },
@@ -141,7 +133,6 @@ function App(location) {
                     deckCards = JSON.parse(deckCards);
                     for (var i=0; i<deckCards.length; i++) {
                         var card = theApp.createCardFromArray(deckCards[i]);
-                        console.log(card);
                         deck.cards.push(card);
                     }
                 } else {
@@ -151,7 +142,6 @@ function App(location) {
             }
         } else {
             var theDeck = new Deck('activeDeck');
-            console.log('LS empty');
             this.decks.push(theDeck);
         }
     },

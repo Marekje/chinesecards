@@ -83,7 +83,7 @@ function Card(chinese, pinyin, translation, dateCrea, datesModif) {
         // VARIABLES
         var cardObject = this;
         var state;
-        cardState ? state = cardState : state = 'look';
+        cardState ? state = cardState : state = 'learn';
         var chineseState, pinyinState, translationState;
 
         if (cardState === 'look') {

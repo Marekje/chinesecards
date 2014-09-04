@@ -50,82 +50,54 @@ function Deck(name) {
     this.showCardsOneByOne = function(cardsState) {
 
         // VARIABLES
-        var deckObject = this;
-        var state = cardsState ? cardsState : 'look';
+        var that = this;
+        var state = cardsState ? cardsState : 'learn';
+        var newCard = that.getNextCard(cardsState);
 
         // HTML
-        var lookHTML = document.createElement('section');
-            lookHTML.className = 'deck__learn';
-
-            /* Card */
-            var cardLocation = document.createElement('div');
-            cardLocation.className = 'deck__card';
-            var cardToShow = deckObject.cards[0];
-            cardLocation.appendChild(cardToShow.createHTML(state));
-
-            /* Next button*/
-            var toolbar = document.createElement('div');
-                toolbar.className = 'deck__toolbar';
-                var nextButton = Plans.button('action', 'Next');
-            toolbar.appendChild(nextButton);
-
-        lookHTML.appendChild(cardLocation);
-        lookHTML.appendChild(toolbar);
+        var nextButton = Plans.button('action', 'Next');
+        var showCardsHTML = Plans.doCardsOneByOne(newCard, [nextButton]);
 
         // BEHAVIORS
         nextButton.addEventListener('click', function(e) {
-            deckObject.whatShouldIDo(); /* Does something to the previous card*/
 
-            // ANALYSE THE LEARNED CARD
+            that.whatShouldIDo();
+            var nextCard = that.getNextCard(cardsState);
 
-            var newCardHTML = deckObject.cards[0].createHTML(state); /* DOESN'T UPDATE THE HTML !!*/
-            cardLocation.innerHTML = '';
-            cardLocation.appendChild(newCardHTML);
-            showAllDeck(deckObject);
+            that.replaceCard('deckOneCard', nextCard);
+            showAllDeck(that);
         }, false);
 
-        return lookHTML;
-    }
+        return showCardsHTML;
+    },
 
+    /*
+        ADD NEXT CARD
+        show the next card
+    */
+    this.getNextCard = function(state) {
+        var that = this;
+        var newCard;
 
-    /* ADD CARDS ONE BY ONE */
-    this.addCardsOneByOne = function() {
+        if (state === 'edit') {
+            newCard = new Card();
+            that.cards.unshift(newCard);
+        } else {
+            newCard = that.cards[0];
+        }
 
-        // VARIABLES
-        var deckObject = this;
-        var newCard = new Card();
-            deckObject.cards.unshift(newCard);
+        return newCard.createHTML(state);
 
-        // HTML
-        var addCardsHTML = document.createElement('section');
-            addCardsHTML.className = 'deck__learn';
+    },
 
-            /* Card */
-            var cardLocation = document.createElement('div');
-            cardLocation.className = 'deck__card';
-            cardLocation.appendChild(newCard.createHTML('edit'));
-
-            /* Next button*/
-            var toolbar = document.createElement('div');
-                toolbar.className = 'deck__toolbar';
-                var nextButton = Plans.button('action', 'Next');
-            toolbar.appendChild(nextButton);
-
-        addCardsHTML.appendChild(cardLocation);
-        addCardsHTML.appendChild(toolbar);
-
-        // BEHAVIORS
-        nextButton.addEventListener('click', function(e) {
-            deckObject.whatShouldIDo(); /* Does something to the previous card*/
-            var newNewCard = new Card();
-            deckObject.cards.unshift(newNewCard);
-            var newCardHTML = newNewCard.createHTML('edit'); /* DOESN'T UPDATE THE HTML !!*/
-            cardLocation.innerHTML = '';
-            cardLocation.appendChild(newCardHTML);
-            showAllDeck(deckObject);
-        }, false);
-
-        return addCardsHTML;
+    /* REPLACE CARD
+        replace a car dby another
+        cardBoxId : the id of the box containing the card to replace
+    */
+    this.replaceCard = function(cardBoxId, newCard) {
+        var cardLocation = document.querySelector('#'+cardBoxId);
+        cardLocation.innerHTML = '';
+        cardLocation.appendChild(newCard);
     }
 
 }
