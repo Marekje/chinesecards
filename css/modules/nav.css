@@ -1,20 +1,21 @@
 /*
-Syntax error: Undefined variable: "$font-chinese".
-        on line 17 of scss/modules/nav.scss
+Syntax error: Undefined variable: "$black".
+        on line 7 of scss/modules/nav.scss
 
-12: .nav__menu {
-13:     float: right;
-14: }
-15: 
-16: .nav__logo {
-17:     font-family: $font-chinese;
-18:     font-weight: 100;
-19:     font-size: $fontscale-2+em;
-20:     color: $color-accent;
-21: }
+2:     NAV module
+3:     -> styles pertaining to the main navigation element,
+4:         the menu on the top of the app.
+5: *\/
+6: nav {
+7:     background-color: $black;
+8: }
+9: nav > * {
+10:     display: inline-block;
+11:     padding: 0.4em;
+12: }
 
 Backtrace:
-scss/modules/nav.scss:17
+scss/modules/nav.scss:7
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/script/tree/variable.rb:49:in `_perform'
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/script/tree/node.rb:50:in `perform'
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/tree/visitors/perform.rb:366:in `visit_prop'
@@ -66,4 +67,4 @@ scss/modules/nav.scss:17
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined variable: \"$font-chinese\".\A         on line 17 of scss/modules/nav.scss\A \A 12: .nav__menu {\A 13:     float: right;\A 14: }\A 15: \A 16: .nav__logo {\A 17:     font-family: $font-chinese;\A 18:     font-weight: 100;\A 19:     font-size: $fontscale-2+em;\A 20:     color: $color-accent;\A 21: }"; }
+  content: "Syntax error: Undefined variable: \"$black\".\A         on line 7 of scss/modules/nav.scss\A \A 2:     NAV module\A 3:     -> styles pertaining to the main navigation element,\A 4:         the menu on the top of the app.\A 5: */\A 6: nav {\A 7:     background-color: $black;\A 8: }\A 9: nav > * {\A 10:     display: inline-block;\A 11:     padding: 0.4em;\A 12: }"; }

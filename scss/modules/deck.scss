@@ -1,17 +1,36 @@
 /* DECK RELATED SCSS*/
 
 .deck__learn {
-    width: 100%;
+    width: 98%;
+    margin: auto;
 
-    .deck__card,
-    .deck__toolbar {
-        display: inline-block;
-    }
-    .deck__card {
-        width: 80%;
-    }
-    .deck__toolbar {
-        float: right;
-        width: 18%;
-    }
+    display: flex;
+    align-items: stretch;
+}
+
+.deck__card,
+.deck__toolbar {
+
+}
+.deck__card {
+    flex-grow: 4;
+}
+.deck__toolbar {
+    flex-grow: 1;
+
+    display: flex;
+    align-items: stretch;
+    align-content: stretch;
+}
+
+.deck__toolbar li {
+    display: block;
+    width: 100%;
+    display: flex;
+}
+
+.deck__toolbar .btn {
+    display: block;
+    width: 100%;
+    align-items: stretch;
 }

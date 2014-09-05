@@ -52,13 +52,20 @@ table {
   border-spacing: 0; }
 
 /* BASE */
+/*        āáǎàa
+    It's not easy to find a font that allows pinyin writing :
+    test with ǎ (Keyboard US-extended, [alt+v] -> [a]) put
+    a regular a next to it and see how it looks. If "ǎ" and
+    "a" are the same, you're good. So far, I use Source San
+    Pro from Adobe Typekit for pinyin.
+    ->     http://www.kendraschaefer.com/2012/06/chinese-standard-web-fonts-the-ultimate-guide-to-css-font-family-declarations-for-web-design-in-simplified-chinese/
+*/
 html {
   background-color: #181b27;
   font-size: 100%;
   font-size: 1rem; }
 
 body {
-  max-width: 20em;
   margin: auto;
   background-color: #323951;
   font-family: "source-sans-pro", "宋体", Georgia, "Times New Roman", "KaiTi", "楷体", STKaiti, "华文楷体", serif;
@@ -88,15 +95,29 @@ a {
 /* MODULES */
 /* DECK RELATED SCSS*/
 .deck__learn {
-  width: 100%; }
-  .deck__learn .deck__card,
-  .deck__learn .deck__toolbar {
-    display: inline-block; }
-  .deck__learn .deck__card {
-    width: 80%; }
-  .deck__learn .deck__toolbar {
-    float: right;
-    width: 18%; }
+  width: 98%;
+  margin: auto;
+  display: flex;
+  align-items: stretch; }
+
+.deck__card {
+  flex-grow: 4; }
+
+.deck__toolbar {
+  flex-grow: 1;
+  display: flex;
+  align-items: stretch;
+  align-content: stretch; }
+
+.deck__toolbar li {
+  display: block;
+  width: 100%;
+  display: flex; }
+
+.deck__toolbar .btn {
+  display: block;
+  width: 100%;
+  align-items: stretch; }
 
 .card {
   background-color: #ffed90;
@@ -106,10 +127,6 @@ a {
 .card p {
   padding: 0.5em;
   margin: 0.5em; }
-
-.card__chinese .card-item__answer,
-.card__chinese .card-item__question {
-  font-size: 1.5em; }
 
 .card-item__answer,
 .card-item__question,
@@ -131,17 +148,34 @@ a {
     -> styles pertaining to the main navigation element,
         the menu on the top of the app.
 */
+nav {
+  background-color: #181b27; }
+
 nav > * {
   display: inline-block;
   padding: 0.4em; }
 
 .nav__menu {
   float: right; }
+  .nav__menu li {
+    display: inline-block;
+    margin-left: 1px; }
+
+.menu__link {
+  display: block;
+  padding: 0.6em 0.4em 0.4em 0.4em;
+  color: #eeece0;
+  text-decoration: none;
+  background-color: #181b27;
+  border-bottom: 3px solid #95a7e2; }
+  .menu__link:hover {
+    color: #95a7e2;
+    border-bottom: 3px solid #a8d46f; }
 
 .nav__logo {
   font-family: "source-sans-pro", "宋体", Georgia, "Times New Roman", "KaiTi", "楷体", STKaiti, "华文楷体", serif;
   font-weight: 100;
-  font-size: 1.2em;
+  font-size: 1.6em;
   color: #ffed90; }
 
 /*------------------------------------*\

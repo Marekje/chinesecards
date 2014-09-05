@@ -22,6 +22,12 @@ $font-chinese: 'source-sans-pro', "宋体", Georgia, "Times New Roman", "KaiTi",
 $font-maintext: 'source-sans-pro', "宋体", Georgia, "Times New Roman", "KaiTi", "楷体", STKaiti, "华文楷体", serif;
 $font-code: 'Anonymous Pro', 'Courier New', Courier;
 
+// SCALES
+$fontscale-1: 1;
+$fontscale-2: 1.2;
+$fontscale-3: 1.6;
+$fontscale-4: 2.4;
+
 // COLORS
 $color-main: $lightblue;
 $color-accent: $yellow;
@@ -36,9 +42,3 @@ $color-text: $white;
 $color-titles: $lightblue;
 $color-links: $yellow;
 $color-links--hover: $lightblue;
-
-// SCALES
-$fontscale-1: 1;
-$fontscale-2: 1.2;
-$fontscale-3: 1.6;
-$fontscale-4: 2.4;

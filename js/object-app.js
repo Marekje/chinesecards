@@ -37,8 +37,8 @@ function App(location) {
             appHTML.className = 'container';
 
         /* Menu */
-        var learn = Plans.button('action', 'Learn');
-        var add   = Plans.button('action', 'Add');
+        var learn = Plans.menuLink('menu__link', 'Learn');
+        var add   = Plans.menuLink('menu__link', 'Add');
 
         var menu = theApp.createMenuHTML([learn, add]);
 

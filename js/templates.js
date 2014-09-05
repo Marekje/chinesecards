@@ -62,7 +62,6 @@ var Plans = {
 
 
     /* BUTTON : EDIT
-        states : 'fixed' || 'editable'
     */
 
     button : function(buttonClass, buttonName) {
@@ -71,7 +70,24 @@ var Plans = {
             buttonHTML.textContent = buttonName;
 
         return buttonHTML;
-    }
+    },
+
+    /* BUTTON LINKS
+        no specific button style, those links help the user navigate
+    */
+
+    menuLink : function(linkClass, linkName) {
+        var linkLi = document.createElement('li');
+
+            var linkHTML = document.createElement('a');
+                linkHTML.href = '#';
+                linkHTML.className = linkClass;
+                linkHTML.textContent = linkName;
+
+            linkLi.appendChild(linkHTML);
+
+        return linkLi;
+    },
 
     /* SHOW CARDS ONE BY ONE
         a simple template allowing a card on the left and a next button on the

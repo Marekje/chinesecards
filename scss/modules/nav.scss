@@ -3,7 +3,9 @@
     -> styles pertaining to the main navigation element,
         the menu on the top of the app.
 */
-
+nav {
+    background-color: $black;
+}
 nav > * {
     display: inline-block;
     padding: 0.4em;
@@ -11,11 +13,29 @@ nav > * {
 
 .nav__menu {
     float: right;
+
+    li {
+        display: inline-block;
+        margin-left: 1px;
+    }
+}
+.menu__link {
+    display: block;
+    padding: 0.6em 0.4em 0.4em 0.4em;
+    color: $color-text;
+    text-decoration: none;
+    background-color: $black;
+    border-bottom: 3px solid $color-main;
+
+    &:hover {
+        color: $color-main;
+        border-bottom: 3px solid $color-action;
+    }
 }
 
 .nav__logo {
     font-family: $font-chinese;
     font-weight: 100;
-    font-size: $fontscale-2+em;
+    font-size: $fontscale-3+em;
     color: $color-accent;
 }

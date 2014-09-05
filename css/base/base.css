@@ -8,7 +8,7 @@ Syntax error: Undefined variable: "$black".
 4:     font-size: 1rem;
 5: }
 6: body {
-7:     max-width: 20em;
+7:     //max-width: 20em;
 
 Backtrace:
 scss/base/base.scss:2
@@ -63,4 +63,4 @@ scss/base/base.scss:2
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined variable: \"$black\".\A         on line 2 of scss/base/base.scss\A \A 1: html {\A 2:     background-color: $black;\A 3:     font-size: 100%;\A 4:     font-size: 1rem;\A 5: }\A 6: body {\A 7:     max-width: 20em;"; }
+  content: "Syntax error: Undefined variable: \"$black\".\A         on line 2 of scss/base/base.scss\A \A 1: html {\A 2:     background-color: $black;\A 3:     font-size: 100%;\A 4:     font-size: 1rem;\A 5: }\A 6: body {\A 7:     //max-width: 20em;"; }
