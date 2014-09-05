@@ -1,26 +1,22 @@
 /*
-Syntax error: Undefined variable: "$black".
-        on line 10 of scss/modules/buttons.scss
+Syntax error: Undefined variable: "$yellow".
+        on line 11 of scss/modules/buttons.scss
 
-5:     -> GITHUB  : https://gist.github.com/Marekje/58e8c9103af720e71905
 6:     (That buttons system should serve as a base for this one)
 7: \*------------------------------------*\/
 8: 
 9: .btn {
-10:     border: 1px solid $black;
+10:     border: none;
 11:     background-color: $yellow;
 12:     color: $darkblue;
-13: }
-14: .btn--action {
-15:     min-width: 4em;
+13:     margin: 0;
+14: }
+15: .btn--action {
+16:     min-width: 4em;
 
 Backtrace:
-scss/modules/buttons.scss:10
+scss/modules/buttons.scss:11
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/script/tree/variable.rb:49:in `_perform'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/script/tree/node.rb:50:in `perform'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/script/tree/list_literal.rb:62:in `block in _perform'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/script/tree/list_literal.rb:62:in `map'
-/Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/script/tree/list_literal.rb:62:in `_perform'
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/script/tree/node.rb:50:in `perform'
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/tree/visitors/perform.rb:366:in `visit_prop'
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/tree/visitors/base.rb:36:in `visit'
@@ -71,4 +67,4 @@ scss/modules/buttons.scss:10
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined variable: \"$black\".\A         on line 10 of scss/modules/buttons.scss\A \A 5:     -> GITHUB  : https://gist.github.com/Marekje/58e8c9103af720e71905\A 6:     (That buttons system should serve as a base for this one)\A 7: \*------------------------------------*/\A 8: \A 9: .btn {\A 10:     border: 1px solid $black;\A 11:     background-color: $yellow;\A 12:     color: $darkblue;\A 13: }\A 14: .btn--action {\A 15:     min-width: 4em;"; }
+  content: "Syntax error: Undefined variable: \"$yellow\".\A         on line 11 of scss/modules/buttons.scss\A \A 6:     (That buttons system should serve as a base for this one)\A 7: \*------------------------------------*/\A 8: \A 9: .btn {\A 10:     border: none;\A 11:     background-color: $yellow;\A 12:     color: $darkblue;\A 13:     margin: 0;\A 14: }\A 15: .btn--action {\A 16:     min-width: 4em;"; }

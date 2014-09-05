@@ -1,9 +1,7 @@
 /* DECK RELATED SCSS*/
 
 .deck__learn {
-    width: 98%;
-    margin: auto;
-
+    width: 100%;
     display: flex;
     align-items: stretch;
 }
@@ -13,10 +11,10 @@
 
 }
 .deck__card {
-    flex-grow: 4;
+    width: 80%;
 }
 .deck__toolbar {
-    flex-grow: 1;
+    width: 20%;
 
     display: flex;
     align-items: stretch;
@@ -33,4 +31,14 @@
     display: block;
     width: 100%;
     align-items: stretch;
+}
+@media screen and (min-width: 30em) {
+    .deck__toolbar .btn {
+        font-size: 2em;
+    }
+}
+@media screen and (min-width: 50em) {
+    .deck__toolbar .btn {
+        font-size: 3em;
+    }
 }

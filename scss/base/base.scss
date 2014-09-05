@@ -1,10 +1,17 @@
+* {
+    box-sizing: border-box;
+}
+
 html {
+
     background-color: $black;
     font-size: 100%;
     font-size: 1rem;
+
 }
+
 body {
-    //max-width: 20em;
+    max-width: $app_max-width;
     margin: auto;
 
     background-color: $color-background;

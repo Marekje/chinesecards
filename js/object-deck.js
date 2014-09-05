@@ -41,6 +41,9 @@ function Deck(name) {
         } else {
             this.cards.push(card);
         }
+
+        this.saveDeckToLS();
+
     }
 
     /* MAIN FUNCTIONS - CREATES HTML */
@@ -59,6 +62,9 @@ function Deck(name) {
         var showCardsHTML = Plans.doCardsOneByOne(newCard, [nextButton]);
 
         // BEHAVIORS
+        newCard.addEventListener('keyup', function(e) {
+            that.saveDeckToLS();
+        }, false);
         nextButton.addEventListener('click', function(e) {
 
             that.whatShouldIDo();
@@ -79,14 +85,15 @@ function Deck(name) {
         var that = this;
         var newCard;
 
-        if (state === 'edit') {
+        if (state === 'edit' || !that.cards[0]) {
             newCard = new Card();
             that.cards.unshift(newCard);
+            return newCard.createHTML('edit');
         } else {
             newCard = that.cards[0];
+            return newCard.createHTML(state);
         }
 
-        return newCard.createHTML(state);
 
     },
 
@@ -98,6 +105,15 @@ function Deck(name) {
         var cardLocation = document.querySelector('#'+cardBoxId);
         cardLocation.innerHTML = '';
         cardLocation.appendChild(newCard);
+    }
+
+    /* SAVE DECK TO LS
+        -> DON'T FORGET TO CHECK App.saveDecksToLS()
+           BEFORE ANY MODIFICATION !!!!
+    */
+    this.saveDeckToLS = function() {
+        var deckJSON = JSON.stringify(this.cards);
+        localStorage.setItem(this.name, deckJSON);
     }
 
 }
