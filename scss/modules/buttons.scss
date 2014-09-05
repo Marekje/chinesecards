@@ -7,14 +7,17 @@
 \*------------------------------------*/
 
 .btn {
-    border: 1px solid $black;
+    border: none;
     background-color: $yellow;
     color: $darkblue;
+    margin: 0;
 }
 .btn--action {
     min-width: 4em;
     min-height: 4em;
-    border-radius: 0.2em;
 
     background-color: $color-action;
+}
+.btn:focus {
+    box-shadow: none;
 }

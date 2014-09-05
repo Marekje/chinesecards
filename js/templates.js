@@ -1,5 +1,34 @@
 var Plans = {
 
+    /* DO SMTG WITH CARDS ONE BY ONE
+        -> Creates a template that show a card and a button bar
+        card : the HTML for a Card object
+        buttons : an Array of HTML buttons
+    */
+    doCardsOneByOne: function(card, buttons) {
+
+        var doCardsHTML = document.createElement('section');
+            doCardsHTML.className = 'deck__learn';
+
+            var cardLocation = document.createElement('div');
+                cardLocation.id = 'deckOneCard';
+                cardLocation.className = 'deck__card';
+                cardLocation.appendChild(card);
+
+            var toolbar = document.createElement('ul');
+                toolbar.className = 'deck__toolbar';
+
+                for (i=0; i<buttons.length; i++) {
+                    var toolbarButton = document.createElement('li');
+                        toolbarButton.appendChild(buttons[i]);
+                    toolbar.appendChild(toolbarButton);
+                }
+
+        doCardsHTML.appendChild(cardLocation);
+        doCardsHTML.appendChild(toolbar);
+
+        return doCardsHTML;
+    },
 
     /* CARD */
     /*
@@ -33,7 +62,6 @@ var Plans = {
 
 
     /* BUTTON : EDIT
-        states : 'fixed' || 'editable'
     */
 
     button : function(buttonClass, buttonName) {
@@ -42,7 +70,24 @@ var Plans = {
             buttonHTML.textContent = buttonName;
 
         return buttonHTML;
-    }
+    },
+
+    /* BUTTON LINKS
+        no specific button style, those links help the user navigate
+    */
+
+    menuLink : function(linkClass, linkName) {
+        var linkLi = document.createElement('li');
+
+            var linkHTML = document.createElement('a');
+                linkHTML.href = '#';
+                linkHTML.className = linkClass;
+                linkHTML.textContent = linkName;
+
+            linkLi.appendChild(linkHTML);
+
+        return linkLi;
+    },
 
     /* SHOW CARDS ONE BY ONE
         a simple template allowing a card on the left and a next button on the

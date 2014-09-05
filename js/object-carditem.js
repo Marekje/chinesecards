@@ -102,13 +102,13 @@ function CardItem(content, dateCrea, datesModif, question, marks, marksDates) {
 
         /* When you click on an answer, it becomes editable */
         itemAnswer.addEventListener('click', function(e) {
-
             itemAnswer.setAttribute('contenteditable', true);
         }, false)
 
         /* When you type in an answer, it updates the carditem */
         itemAnswer.addEventListener('keyup', function(e) {
             itemObject.content = this.textContent;
+            
         }, false)
 
         return itemHTML;

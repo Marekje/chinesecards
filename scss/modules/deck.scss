@@ -2,16 +2,43 @@
 
 .deck__learn {
     width: 100%;
+    display: flex;
+    align-items: stretch;
+}
 
-    .deck__card,
-    .deck__toolbar {
-        display: inline-block;
+.deck__card,
+.deck__toolbar {
+
+}
+.deck__card {
+    width: 80%;
+}
+.deck__toolbar {
+    width: 20%;
+
+    display: flex;
+    align-items: stretch;
+    align-content: stretch;
+}
+
+.deck__toolbar li {
+    display: block;
+    width: 100%;
+    display: flex;
+}
+
+.deck__toolbar .btn {
+    display: block;
+    width: 100%;
+    align-items: stretch;
+}
+@media screen and (min-width: 30em) {
+    .deck__toolbar .btn {
+        font-size: 2em;
     }
-    .deck__card {
-        width: 80%;
-    }
-    .deck__toolbar {
-        float: right;
-        width: 18%;
+}
+@media screen and (min-width: 50em) {
+    .deck__toolbar .btn {
+        font-size: 3em;
     }
 }
