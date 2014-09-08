@@ -69,6 +69,22 @@ function Card(chinese, pinyin, translation, dateCrea, datesModif) {
             return false;
         }
     },
+    /* IS WELL KNOWN
+       how many right answers since last wrong answer*/
+    this.isWellKnown = function() {
+        var levelKnown = 0;
+
+        var marksArr = this.chinese.marks;
+        for (var i=marksArr.length; i>0; i--) {
+            if (marksArr[i+1] > 1) {
+                levelKnown++;
+            } else {
+                return levelKnown;
+            }
+        }
+
+        return levelKnown;
+    }
 
     /* CREATEHTML */
     /*
