@@ -27,6 +27,13 @@
     background-color: rgba($black, 0.2);
 }
 
+.card__pinyin .card-item {
+    font-style: italic;
+}
+.card__translation .card-item {
+    color: rgba($black, 0.7);
+}
+
 .card > div:first-child {
     font-size: 2em;
 }

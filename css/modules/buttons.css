@@ -9,10 +9,10 @@ Syntax error: Undefined variable: "$yellow".
 10:     border: none;
 11:     background-color: $yellow;
 12:     color: $darkblue;
-13:     margin: 0;
-14: }
-15: .btn--action {
-16:     min-width: 4em;
+13:     padding: 0;
+14:     margin: 0;
+15: 
+16:     font-family: $font-interface;
 
 Backtrace:
 scss/modules/buttons.scss:11
@@ -67,4 +67,4 @@ scss/modules/buttons.scss:11
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined variable: \"$yellow\".\A         on line 11 of scss/modules/buttons.scss\A \A 6:     (That buttons system should serve as a base for this one)\A 7: \*------------------------------------*/\A 8: \A 9: .btn {\A 10:     border: none;\A 11:     background-color: $yellow;\A 12:     color: $darkblue;\A 13:     margin: 0;\A 14: }\A 15: .btn--action {\A 16:     min-width: 4em;"; }
+  content: "Syntax error: Undefined variable: \"$yellow\".\A         on line 11 of scss/modules/buttons.scss\A \A 6:     (That buttons system should serve as a base for this one)\A 7: \*------------------------------------*/\A 8: \A 9: .btn {\A 10:     border: none;\A 11:     background-color: $yellow;\A 12:     color: $darkblue;\A 13:     padding: 0;\A 14:     margin: 0;\A 15: \A 16:     font-family: $font-interface;"; }
