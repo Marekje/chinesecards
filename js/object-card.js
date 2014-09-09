@@ -69,12 +69,29 @@ function Card(chinese, pinyin, translation, dateCrea, datesModif) {
             return false;
         }
     },
+    /* IS WELL KNOWN
+       how many right answers since last wrong answer*/
+    this.isWellKnown = function() {
+        var levelKnown = 0;
+
+        var marksArr = this.chinese.marks;
+        for (var i=marksArr.length; i>0; i--) {
+            if (marksArr[i-1] > 1) {
+                levelKnown++;
+                console.log('plussed' + levelKnown)
+            } else {
+                return levelKnown;
+            }
+        }
+
+        return levelKnown;
+    }
 
     /* CREATEHTML */
     /*
         -> makes an HTML version of the Card
         -> returns it
-        -> can change state from look||learn to edit
+        -> can change state from look || learn to edit
         card states : 'look', 'learn', 'edit'
 
     */

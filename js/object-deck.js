@@ -31,15 +31,25 @@ function Deck(name) {
         var empty = card.isAnEmptyCard(); /* true if empty, false is not empty*/
         var learnt = card.hasBeenSeen(); /* true if there is at least a 2 or 3 in the marks*/
         var wrong = card.isAWrongAnswer(); /* true if an answer is bad (marks ===1 ) */
+        var howMuchLearning = card.isWellKnown();
+        console.log(howMuchLearning);
 
         if (empty) {
             /* Do Nothing */
         } else if (!learnt) {
             this.cards.unshift(card);
         } else if (wrong) {
-            this.cards.splice(5, 0, card);
+            this.cards.splice(3, 0, card);
+            console.log('wrong');
         } else {
-            this.cards.push(card);
+            var spliceLvl = howMuchLearning*3;
+            if (this.cards.length < spliceLvl) {
+                this.cards.push(card);
+                console.log('pushed');
+            } else {
+                this.cards.splice(spliceLvl, 0, card);
+                console.log('spliced' + spliceLvl);
+            }
         }
 
         this.saveDeckToLS();
