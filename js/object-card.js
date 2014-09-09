@@ -76,8 +76,9 @@ function Card(chinese, pinyin, translation, dateCrea, datesModif) {
 
         var marksArr = this.chinese.marks;
         for (var i=marksArr.length; i>0; i--) {
-            if (marksArr[i+1] > 1) {
+            if (marksArr[i-1] > 1) {
                 levelKnown++;
+                console.log('plussed' + levelKnown)
             } else {
                 return levelKnown;
             }
@@ -90,7 +91,7 @@ function Card(chinese, pinyin, translation, dateCrea, datesModif) {
     /*
         -> makes an HTML version of the Card
         -> returns it
-        -> can change state from look||learn to edit
+        -> can change state from look || learn to edit
         card states : 'look', 'learn', 'edit'
 
     */

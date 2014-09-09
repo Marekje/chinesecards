@@ -43,7 +43,7 @@ function Deck(name) {
             console.log('wrong');
         } else {
             var spliceLvl = howMuchLearning*3;
-            if (this.cards.length > spliceLvl) {
+            if (this.cards.length < spliceLvl) {
                 this.cards.push(card);
                 console.log('pushed');
             } else {
