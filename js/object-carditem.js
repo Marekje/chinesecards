@@ -36,12 +36,34 @@ function CardItem(content, dateCrea, datesModif, question, marks, marksDates) {
         if (number === 1) {
             itemObject.marks.pop();
             itemObject.marks.push(number);
+            console.log(itemObject.content + itemObject.marks);
             itemObject.marksDates.pop();
             itemObject.marksDates.push(Date.now());
         } else {
             itemObject.marks.push(number);
             itemObject.marksDates.push(Date.now());
         }
+    }
+
+    /* LEVEL KNOWN
+        returns the number of times since last wrong answer
+    */
+    this.levelKnown = function() {
+        var that = this;
+        var levelKnown = 0;
+
+        for (var i=that.marks.length; i>0; i--) {
+            if (that.marks[i-1] > 1) {
+                console.log("plus" + levelKnown);
+                levelKnown++;
+            } else {
+                console.log("not" + levelKnown);
+                return levelKnown;
+            }
+        }
+        console.log("done" + levelKnown);
+        return levelKnown;
+
     }
 
     /* CREATEHTML */

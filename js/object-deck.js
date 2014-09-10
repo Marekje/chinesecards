@@ -30,16 +30,17 @@ function Deck(name) {
         var card = this.cards.shift();
         var empty = card.isAnEmptyCard(); /* true if empty, false is not empty*/
         var learnt = card.hasBeenSeen(); /* true if there is at least a 2 or 3 in the marks*/
-        var wrong = card.isAWrongAnswer(); /* true if an answer is bad (marks ===1 ) */
-        var howMuchLearning = card.isWellKnown();
+        var howMuchLearning = card.isWellKnown(); /* 0 if user didn't know the card last\
+                                                     time. the bigger the number, the more
+                                                     well-known the card*/
         console.log(howMuchLearning);
 
         if (empty) {
             /* Do Nothing */
         } else if (!learnt) {
             this.cards.unshift(card);
-        } else if (wrong) {
-            this.cards.splice(3, 0, card);
+        } else if (howMuchLearning === 0) {
+            this.cards.splice(2, 0, card);
             console.log('wrong');
         } else {
             var spliceLvl = howMuchLearning*3;

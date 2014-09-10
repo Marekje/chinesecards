@@ -37,18 +37,6 @@ function Card(chinese, pinyin, translation, dateCrea, datesModif) {
 
         return marks;
     },
-    this.isAWrongAnswer = function() {
-        var lastMarks = this.getLastMarks();
-        var badAnswerExists = false;
-
-        for (i=0; i<lastMarks.length; i++) {
-            if (lastMarks[i] === 1) {
-                badAnswerExists = true;
-            }
-        }
-
-        return badAnswerExists;
-    },
     this.isAnEmptyCard = function() {
         if (this.chinese.content
             || this.pinyin.content
@@ -70,21 +58,21 @@ function Card(chinese, pinyin, translation, dateCrea, datesModif) {
         }
     },
     /* IS WELL KNOWN
-       how many right answers since last wrong answer*/
+       how many right answers since last wrong answer
+       should return "0" -> wrong answer last, or "number",
+       with the number of right answers after the last wrong one
+    */
     this.isWellKnown = function() {
-        var levelKnown = 0;
+        var that = this;
 
-        var marksArr = this.chinese.marks;
-        for (var i=marksArr.length; i>0; i--) {
-            if (marksArr[i-1] > 1) {
-                levelKnown++;
-                console.log('plussed' + levelKnown)
-            } else {
-                return levelKnown;
-            }
-        }
+        var chinLvl = that.chinese.levelKnown();
+        var pinyLvl = that.pinyin.levelKnown();
+        var tranLvl = that.translation.levelKnown();
 
-        return levelKnown;
+        var minLvl = Math.min(chinLvl, pinyLvl, tranLvl);
+
+        console.log(chinLvl, pinyLvl, tranLvl);
+        return minLvl;
     }
 
     /* CREATEHTML */
