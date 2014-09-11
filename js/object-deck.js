@@ -83,6 +83,12 @@ function Deck(name) {
 
             that.replaceCard('deckOneCard', nextCard);
             showAllDeck(that);
+
+            if (cardsState === 'edit') {
+                var firstItem = nextCard.querySelector('.card-item__answer');
+                firstItem.focus();
+            }
+
         }, false);
 
         return showCardsHTML;
