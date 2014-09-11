@@ -21,6 +21,7 @@ $transparent-darkblue: rgba($darkblue, 0.5);
 $font-chinese: 'source-sans-pro', "宋体", Georgia, "Times New Roman", "KaiTi", "楷体", STKaiti, "华文楷体", serif;
 $font-maintext: 'source-sans-pro', "宋体", Georgia, "Times New Roman", "KaiTi", "楷体", STKaiti, "华文楷体", serif;
 $font-code: 'Anonymous Pro', 'Courier New', Courier;
+$font-interface: 'helvetica', verdana, sans-serif;
 
 // SCALES
 $fontscale-1: 1;
@@ -45,4 +46,4 @@ $color-links--hover: $lightblue;
 
 // GLOBAL VARIABLES
 
-$app_max-width: 50em;
+$app_max-width: 70em;

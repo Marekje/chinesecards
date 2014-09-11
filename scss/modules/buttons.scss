@@ -10,12 +10,13 @@
     border: none;
     background-color: $yellow;
     color: $darkblue;
+    padding: 0;
     margin: 0;
+
+    font-family: $font-interface;
+    font-weight: 100;
 }
 .btn--action {
-    min-width: 4em;
-    min-height: 4em;
-
     background-color: $color-action;
 }
 .btn:focus {

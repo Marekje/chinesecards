@@ -60,7 +60,9 @@ table {
     Pro from Adobe Typekit for pinyin.
     ->     http://www.kendraschaefer.com/2012/06/chinese-standard-web-fonts-the-ultimate-guide-to-css-font-family-declarations-for-web-design-in-simplified-chinese/
 */
-* {
+*,
+*:before,
+*:after {
   box-sizing: border-box; }
 
 html {
@@ -69,8 +71,8 @@ html {
   font-size: 1rem; }
 
 body {
-  max-width: 50em;
-  margin: auto;
+  max-width: 70em;
+  margin: 0 auto;
   background-color: #323951;
   font-family: "source-sans-pro", "宋体", Georgia, "Times New Roman", "KaiTi", "楷体", STKaiti, "华文楷体", serif;
   color: #eeece0; }
@@ -154,6 +156,12 @@ a {
 .card [contenteditable='true'] {
   background-color: rgba(24, 27, 39, 0.2); }
 
+.card__pinyin .card-item {
+  font-style: italic; }
+
+.card__translation .card-item {
+  color: rgba(24, 27, 39, 0.7); }
+
 .card > div:first-child {
   font-size: 2em; }
 
@@ -184,12 +192,14 @@ nav > * {
 .menu__link {
   display: block;
   padding: 0.6em 0.4em 0.4em 0.4em;
-  color: #eeece0;
+  color: rgba(238, 236, 224, 0.8);
   text-decoration: none;
   background-color: #181b27;
-  border-bottom: 3px solid #95a7e2; }
+  border-bottom: 3px solid rgba(238, 236, 224, 0.8);
+  font-family: "helvetica", verdana, sans-serif;
+  font-weight: 100; }
   .menu__link:hover {
-    color: #95a7e2;
+    color: #eeece0;
     border-bottom: 3px solid #a8d46f; }
 
 .nav__logo {
@@ -209,11 +219,12 @@ nav > * {
   border: none;
   background-color: #ffed90;
   color: #323951;
-  margin: 0; }
+  padding: 0;
+  margin: 0;
+  font-family: "helvetica", verdana, sans-serif;
+  font-weight: 100; }
 
 .btn--action {
-  min-width: 4em;
-  min-height: 4em;
   background-color: #a8d46f; }
 
 .btn:focus {

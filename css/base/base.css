@@ -1,21 +1,21 @@
 /*
 Syntax error: Undefined variable: "$black".
-        on line 7 of scss/base/base.scss
+        on line 9 of scss/base/base.scss
 
-2:     box-sizing: border-box;
-3: }
-4: 
-5: html {
+4:     box-sizing: border-box;
+5: }
 6: 
-7:     background-color: $black;
-8:     font-size: 100%;
-9:     font-size: 1rem;
-10: 
-11: }
+7: html {
+8: 
+9:     background-color: $black;
+10:     font-size: 100%;
+11:     font-size: 1rem;
 12: 
+13: }
+14: 
 
 Backtrace:
-scss/base/base.scss:7
+scss/base/base.scss:9
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/script/tree/variable.rb:49:in `_perform'
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/script/tree/node.rb:50:in `perform'
 /Users/Pierre/.rvm/gems/ruby-1.9.2-p320/gems/sass-3.3.9/lib/sass/tree/visitors/perform.rb:366:in `visit_prop'
@@ -67,4 +67,4 @@ scss/base/base.scss:7
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined variable: \"$black\".\A         on line 7 of scss/base/base.scss\A \A 2:     box-sizing: border-box;\A 3: }\A 4: \A 5: html {\A 6: \A 7:     background-color: $black;\A 8:     font-size: 100%;\A 9:     font-size: 1rem;\A 10: \A 11: }\A 12: "; }
+  content: "Syntax error: Undefined variable: \"$black\".\A         on line 9 of scss/base/base.scss\A \A 4:     box-sizing: border-box;\A 5: }\A 6: \A 7: html {\A 8: \A 9:     background-color: $black;\A 10:     font-size: 100%;\A 11:     font-size: 1rem;\A 12: \A 13: }\A 14: "; }
