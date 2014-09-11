@@ -43,7 +43,8 @@ function Deck(name) {
             this.cards.splice(2, 0, card);
             console.log('wrong');
         } else {
-            var spliceLvl = howMuchLearning*3;
+            var spliceLvl = howMuchLearning*howMuchLearning; /* the better
+                          you know it, the more space betwwen views */
             if (this.cards.length < spliceLvl) {
                 this.cards.push(card);
                 console.log('pushed');
