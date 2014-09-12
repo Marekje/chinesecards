@@ -32,16 +32,16 @@ function CardItem(content, dateCrea, datesModif, question, marks, marksDates) {
         on the answer.
     */
     this.updateMarks = function(number) {
-        var itemObject = this;
+        var that = this;
         if (number === 1) {
-            itemObject.marks.pop();
-            itemObject.marks.push(number);
-            console.log(itemObject.content + itemObject.marks);
-            itemObject.marksDates.pop();
-            itemObject.marksDates.push(Date.now());
+            that.marks.pop();
+            that.marks.push(number);
+            console.log(that.content + that.marks);
+            that.marksDates.pop();
+            that.marksDates.push(Date.now());
         } else {
-            itemObject.marks.push(number);
-            itemObject.marksDates.push(Date.now());
+            that.marks.push(number);
+            that.marksDates.push(Date.now());
         }
     }
 
@@ -77,29 +77,22 @@ function CardItem(content, dateCrea, datesModif, question, marks, marksDates) {
         // CREATE VARIABLES ACCORDING TO STATE
         var itemObject = this;
 
-        var editability, answerVisibility, questionVisibility;
+        var editability = false; /* most used state */
+        var answerVisibility = 'visible';   /* idem */
+        var questionVisibility = 'hidden';  /* idem */
 
         if (state === 'edit') {
             editability = true;
-            answerVisibility = 'visible';
-            questionVisibility = 'hidden';
         } else if (state === 'learn') {
             if (itemObject.levelKnown() === 0) {
-                editability = false;
-                answerVisibility = 'visible';
-                questionVisibility = 'hidden';
                 itemObject.updateMarks(2);
             } else {
-                editability = false;
                 answerVisibility = 'hidden';
                 questionVisibility = 'visible';
                 itemObject.updateMarks(3); /* add a good mark for this object,
                                                  see (a) for bad marks, */
             }
         } else {
-            editability = false;
-            answerVisibility = 'visible';
-            questionVisibility = 'hidden';
             itemObject.updateMarks(2);
         }
 
