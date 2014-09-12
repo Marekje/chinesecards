@@ -84,11 +84,18 @@ function CardItem(content, dateCrea, datesModif, question, marks, marksDates) {
             answerVisibility = 'visible';
             questionVisibility = 'hidden';
         } else if (state === 'learn') {
-            editability = false;
-            answerVisibility = 'hidden';
-            questionVisibility = 'visible';
-            itemObject.updateMarks(3); /* add a good mark for this object,
-                                             see (a) for bad marks, */
+            if (itemObject.levelKnown() === 0) {
+                editability = false;
+                answerVisibility = 'visible';
+                questionVisibility = 'hidden';
+                itemObject.updateMarks(2);
+            } else {
+                editability = false;
+                answerVisibility = 'hidden';
+                questionVisibility = 'visible';
+                itemObject.updateMarks(3); /* add a good mark for this object,
+                                                 see (a) for bad marks, */
+            }
         } else {
             editability = false;
             answerVisibility = 'visible';
