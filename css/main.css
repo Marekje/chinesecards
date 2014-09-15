@@ -123,6 +123,12 @@ a {
   display: block;
   width: 100%;
   align-items: stretch; }
+  .deck__toolbar .btn:focus:after {
+    content: " You can also press [space]";
+    display: block;
+    color: rgba(24, 27, 39, 0.5);
+    font-size: 0.8rem;
+    font-style: italic; }
 
 @media screen and (min-width: 30em) {
   .deck__toolbar .btn {
@@ -226,6 +232,8 @@ nav > * {
 
 .btn--action {
   background-color: #a8d46f; }
+  .btn--action:hover {
+    background-color: rgba(168, 212, 111, 0.8); }
 
 .btn:focus {
   box-shadow: none; }
