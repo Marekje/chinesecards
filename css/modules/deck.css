@@ -2,10 +2,10 @@
 Syntax error: Undefined variable: "$card_color-text".
         on line 38 of scss/modules/deck.scss
 
-33:     align-items: stretch;
+33:     width: 100%;
 34: 
 35:     &:focus:after{
-36:         content: " You can also press [space]";
+36:         content: " Press [space]";
 37:         display: block;
 38:         color: rgba($card_color-text, 0.5);
 39:         font-size: 0.8rem;
@@ -86,4 +86,4 @@ scss/modules/deck.scss:38
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined variable: \"$card_color-text\".\A         on line 38 of scss/modules/deck.scss\A \A 33:     align-items: stretch;\A 34: \A 35:     &:focus:after{\A 36:         content: \" You can also press [space]\";\A 37:         display: block;\A 38:         color: rgba($card_color-text, 0.5);\A 39:         font-size: 0.8rem;\A 40:         font-style: italic;\A 41:     }\A 42: }\A 43: @media screen and (min-width: 30em) {"; }
+  content: "Syntax error: Undefined variable: \"$card_color-text\".\A         on line 38 of scss/modules/deck.scss\A \A 33:     width: 100%;\A 34: \A 35:     &:focus:after{\A 36:         content: \" Press [space]\";\A 37:         display: block;\A 38:         color: rgba($card_color-text, 0.5);\A 39:         font-size: 0.8rem;\A 40:         font-style: italic;\A 41:     }\A 42: }\A 43: @media screen and (min-width: 30em) {"; }

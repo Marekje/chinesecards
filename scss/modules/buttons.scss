@@ -22,6 +22,9 @@
     &:hover {
         background-color: rgba($color-action, 0.8);
     }
+    &:focus {
+        border: 0.1em solid rgba($card_color-text, 0.3);
+    }
 }
 .btn:focus {
     box-shadow: none;

@@ -29,11 +29,11 @@
 
 .deck__toolbar .btn {
     display: block;
+    position: relative;
     width: 100%;
-    align-items: stretch;
 
     &:focus:after{
-        content: " You can also press [space]";
+        content: " Press [space]";
         display: block;
         color: rgba($card_color-text, 0.5);
         font-size: 0.8rem;
