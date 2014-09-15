@@ -38,7 +38,7 @@ function main() {
 function showAllDeck(deck) {
     var showDeck = deck.name + ':';
     for (var i=0; i<deck.cards.length; i++) {
-        showDeck += ' ' + deck.cards[i].chinese.content;
+        showDeck += ' ' + deck.cards[i].chinese.content + deck.cards[i].hasBeenSeen();
     }
     console.log(showDeck);
 };

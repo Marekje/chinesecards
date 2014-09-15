@@ -102,19 +102,21 @@ function Card(chinese, pinyin, translation, dateCrea, datesModif) {
                array to the var...*/
 
             /* get last marks date for the three of them */
-            var chineseState = cardObject.chinese.marks[cardObject.chinese.marks.length-1];
-            var pinyinState = cardObject.pinyin.marks[cardObject.pinyin.marks.length-1];
-            var translationState = cardObject.translation.marks[cardObject.translation.marks.length-1];
+            var chineseState = cardObject.chinese.levelKnown();
+            var pinyinState = cardObject.pinyin.levelKnown();
+            var translationState = cardObject.translation.levelKnown();
 
-            if (chineseState === 0 || chineseState === 1 ) {
-                chineseState = 'learn';
-                pinyinState = translationState = 'look';
-            } else if (pinyinState === 0 || pinyinState === 1 ) {
-                pinyinState = 'learn';
-                chineseState = translationState = 'look';
+            if (chineseState === pinyinState === translationState === 0) {
+                chineseState = pinyinState = translationState = 'look';
             } else if (translationState === 0 || translationState === 1 ) {
                 translationState = 'learn';
                 chineseState = pinyinState = 'look';
+            } else if (pinyinState === 0 || pinyinState === 1 ) {
+                pinyinState = 'learn';
+                chineseState = translationState = 'look';
+            } else if (chineseState === 0 || chineseState === 1 ) {
+                chineseState = 'learn';
+                pinyinState = translationState = 'look';
             } else {
                 /* Randomly choose one to learn : */
                 var randLearn = getRandomInt(1, 3);
