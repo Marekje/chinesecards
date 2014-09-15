@@ -36,7 +36,6 @@ function CardItem(content, dateCrea, datesModif, question, marks, marksDates) {
         if (number === 1) {
             that.marks.pop();
             that.marks.push(number);
-            console.log(that.content + that.marks);
             that.marksDates.pop();
             that.marksDates.push(Date.now());
         } else {
@@ -46,7 +45,8 @@ function CardItem(content, dateCrea, datesModif, question, marks, marksDates) {
     }
 
     /* LEVEL KNOWN
-        returns the number of times since last wrong answer
+        returns the number of times since last wrong answer,
+        or if you've never seen it
     */
     this.levelKnown = function() {
         var that = this;
@@ -56,11 +56,9 @@ function CardItem(content, dateCrea, datesModif, question, marks, marksDates) {
             if (that.marks[i-1] > 1) {
                 levelKnown++;
             } else {
-                console.log("not" + that.content + levelKnown);
                 return levelKnown;
             }
         }
-        console.log("done" + that.content + levelKnown);
         return levelKnown;
 
     }
@@ -83,14 +81,10 @@ function CardItem(content, dateCrea, datesModif, question, marks, marksDates) {
         if (state === 'edit') {
             editability = true;
         } else if (state === 'learn') {
-            if (itemObject.levelKnown() === 0) {
-                itemObject.updateMarks(2);
-            } else {
-                answerVisibility = 'hidden';
-                questionVisibility = 'visible';
-                itemObject.updateMarks(3); /* add a good mark for this object,
-                                                 see (a) for bad marks, */
-            }
+            answerVisibility = 'hidden';
+            questionVisibility = 'visible';
+            itemObject.updateMarks(3); /* add a good mark for this object,
+                                             see (a) for bad marks, */
         } else {
             itemObject.updateMarks(2);
         }
