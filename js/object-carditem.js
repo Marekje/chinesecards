@@ -54,14 +54,13 @@ function CardItem(content, dateCrea, datesModif, question, marks, marksDates) {
 
         for (var i=that.marks.length; i>0; i--) {
             if (that.marks[i-1] > 1) {
-                console.log("plus" + levelKnown);
                 levelKnown++;
             } else {
-                console.log("not" + levelKnown);
+                console.log("not" + that.content + levelKnown);
                 return levelKnown;
             }
         }
-        console.log("done" + levelKnown);
+        console.log("done" + that.content + levelKnown);
         return levelKnown;
 
     }

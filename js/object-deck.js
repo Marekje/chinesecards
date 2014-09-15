@@ -25,20 +25,37 @@ function Deck(name) {
 
     /* HELP METHODS */
 
+    this.howMuchUnLearnt = function() {
+        var that = this;
+        var number = 0;
+
+        for (var i=0; i<that.cards.length; i++) {
+            if (!that.cards[i].hasBeenSeen()) {
+                number++;
+            } else {
+                return number;
+            }
+        }
+
+        return number;
+    }
+
     /* WHAT SHOULD I DO WITH THE NEW CARD */
     this.whatShouldIDo = function() {
+        var that = this;
         var card = this.cards.shift();
-        var empty = card.isAnEmptyCard(); /* true if empty, false is not empty*/
+        var empty = card.isAnEmptyCard(); /* true if empty, false is not empty */
         var learnt = card.hasBeenSeen(); /* true if there is at least a 2 or 3 in the marks*/
         var howMuchLearning = card.isWellKnown(); /* 0 if user didn't know the card last\
                                                      time. the bigger the number, the more
                                                      well-known the card*/
-        console.log(howMuchLearning);
 
         if (empty) {
             /* Do Nothing */
         } else if (!learnt) {
-            this.cards.unshift(card);
+            var unLearntCards = that.howMuchUnLearnt();
+            that.cards.splice(unLearntCards, 0, card);
+            /* that.cards.unshift(card); */
         } else if (howMuchLearning === 0) {
             this.cards.splice(2, 0, card);
             console.log('wrong');
@@ -55,7 +72,6 @@ function Deck(name) {
         }
 
         this.saveDeckToLS();
-
     }
 
     /* MAIN FUNCTIONS - CREATES HTML */
