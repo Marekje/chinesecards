@@ -55,19 +55,15 @@ function Deck(name) {
         } else if (!learnt) {
             var unLearntCards = that.howMuchUnLearnt();
             that.cards.splice(unLearntCards, 0, card);
-            /* that.cards.unshift(card); */
         } else if (howMuchLearning === 0) {
             this.cards.splice(2, 0, card);
-            console.log('wrong');
         } else {
             var spliceLvl = howMuchLearning*howMuchLearning; /* the better
                           you know it, the more space betwwen views */
             if (this.cards.length < spliceLvl) {
                 this.cards.push(card);
-                console.log('pushed');
             } else {
                 this.cards.splice(spliceLvl, 0, card);
-                console.log('spliced' + spliceLvl);
             }
         }
 

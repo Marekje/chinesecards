@@ -67,7 +67,12 @@ var Plans = {
     button : function(buttonClass, buttonName) {
         var buttonHTML = document.createElement('button');
             buttonHTML.className = 'btn btn--' + buttonClass;
-            buttonHTML.textContent = buttonName;
+
+            var buttonContent = document.createElement('span');
+                buttonContent.className = 'btn__content';
+                buttonContent.textContent = buttonName;
+
+            buttonHTML.appendChild(buttonContent);
 
         return buttonHTML;
     },

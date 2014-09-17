@@ -29,8 +29,16 @@
 
 .deck__toolbar .btn {
     display: block;
+    position: relative;
     width: 100%;
-    align-items: stretch;
+
+    &:focus:after{
+        content: " Press [space]";
+        display: block;
+        color: rgba($card_color-text, 0.5);
+        font-size: 0.8rem;
+        font-style: italic;
+    }
 }
 @media screen and (min-width: 30em) {
     .deck__toolbar .btn {

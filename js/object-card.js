@@ -71,7 +71,6 @@ function Card(chinese, pinyin, translation, dateCrea, datesModif) {
 
         var minLvl = Math.min(chinLvl, pinyLvl, tranLvl);
 
-        console.log(chinLvl, pinyLvl, tranLvl);
         return minLvl;
     }
 
@@ -87,6 +86,7 @@ function Card(chinese, pinyin, translation, dateCrea, datesModif) {
 
         // VARIABLES
         var cardObject = this;
+        var that = this;
         var state;
         cardState ? state = cardState : state = 'learn';
         var chineseState, pinyinState, translationState;
@@ -102,19 +102,20 @@ function Card(chinese, pinyin, translation, dateCrea, datesModif) {
                array to the var...*/
 
             /* get last marks date for the three of them */
-            var chineseState = cardObject.chinese.levelKnown();
-            var pinyinState = cardObject.pinyin.levelKnown();
-            var translationState = cardObject.translation.levelKnown();
 
-            if (chineseState === pinyinState === translationState === 0) {
+            var chineseKnown = that.chinese.levelKnown();
+            var pinyinKnown = that.pinyin.levelKnown();
+            var translationKnown = that.translation.levelKnown();
+
+            if (chineseKnown === pinyinKnown === translationKnown === 0) {
                 chineseState = pinyinState = translationState = 'look';
-            } else if (translationState === 0 || translationState === 1 ) {
+            } else if (translationKnown === 0 || translationKnown === 1 ) {
                 translationState = 'learn';
                 chineseState = pinyinState = 'look';
-            } else if (pinyinState === 0 || pinyinState === 1 ) {
+            } else if (pinyinKnown === 0 || pinyinKnown === 1 ) {
                 pinyinState = 'learn';
                 chineseState = translationState = 'look';
-            } else if (chineseState === 0 || chineseState === 1 ) {
+            } else if (chineseKnown === 0 || chineseKnown === 1 ) {
                 chineseState = 'learn';
                 pinyinState = translationState = 'look';
             } else {
@@ -131,7 +132,6 @@ function Card(chinese, pinyin, translation, dateCrea, datesModif) {
             }
         } else {
             chineseState = pinyinState = translationState = 'look';
-            console.log('Card.createHTML does not receive any cardState');
         }
 
         var chineseHTML, pinyinHTML, translationHTML;

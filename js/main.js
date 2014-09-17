@@ -27,10 +27,6 @@ document.addEventListener("DOMContentLoaded", function() {
     location.appendChild(theApp.main());
 });
 
-function main() {
-    console.log('Hello, world !');
-};
-
 /*
     SHOW ALL DECK
     Debugging function
@@ -38,8 +34,9 @@ function main() {
 function showAllDeck(deck) {
     var showDeck = deck.name + ':';
     for (var i=0; i<deck.cards.length; i++) {
-        showDeck += ' ' + deck.cards[i].chinese.content + deck.cards[i].hasBeenSeen();
+        showDeck += deck.cards[i].chinese.content + " | ";
     }
+    /* KEEP THAT CONSOLE.LOG, IT SHOWS THE STATE OF THE DECK */
     console.log(showDeck);
 };
 
