@@ -1,6 +1,7 @@
 // COLOR SCHEME
 $darkblue: #323951;
 $red: #FFA57F;
+$darkred: #BE2400;
 $green: #A8D46F;
 $yellow: #FFED90;
 $lightblue: #95A7E2;
@@ -38,6 +39,9 @@ $color-action: $green;
 $card_color-background: $yellow;
 $card_color-text: $black;
 $card_color-question: $red;
+
+$card_color-hidden: $darkblue;
+$card_color-shown: $darkred;
 
 $color-text: $white;
 $color-titles: $lightblue;

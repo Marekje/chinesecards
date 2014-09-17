@@ -72,21 +72,19 @@ function CardItem(content, dateCrea, datesModif, question, marks, marksDates) {
     this.createHTML = function(state) {
 
         // CREATE VARIABLES ACCORDING TO STATE
-        var itemObject = this;
+        var that = this;
 
         var editability = false; /* most used state */
-        var answerVisibility = 'visible';   /* idem */
-        var questionVisibility = 'hidden';  /* idem */
+        var questionState = 'none';   /* idem */
 
         if (state === 'edit') {
             editability = true;
         } else if (state === 'learn') {
-            answerVisibility = 'hidden';
-            questionVisibility = 'visible';
-            itemObject.updateMarks(3); /* add a good mark for this object,
+            questionState = 'hidden';
+            that.updateMarks(3); /* add a good mark for this object,
                                              see (a) for bad marks, */
         } else {
-            itemObject.updateMarks(2);
+            that.updateMarks(2);
         }
 
         // CREATE HTML
@@ -94,35 +92,28 @@ function CardItem(content, dateCrea, datesModif, question, marks, marksDates) {
             itemHTML.className = 'card-item';
             itemHTML.setAttribute('data-state', state);
 
-            var itemAnswer = document.createElement('span');
-                itemAnswer.className = 'card-item__answer ' + answerVisibility;
-                itemAnswer.textContent = this.content;
-                itemAnswer.setAttribute('contenteditable', editability);
+            var itemText = document.createElement('span');
+                itemText.textContent = this.content;
+                itemText.setAttribute('am-Question', questionState);
+                itemText.setAttribute('contenteditable', editability);
 
-            var itemQuestion = document.createElement('span');
-                itemQuestion.className = 'card-item__question ' + questionVisibility;
-                itemQuestion.textContent = this.question;
-
-        itemHTML.appendChild(itemAnswer);
-        itemHTML.appendChild(itemQuestion);
+        itemHTML.appendChild(itemText);
 
         // ADD BEHAVIORS
-        /* When you click on a question, it shows the answer & put a bad grade */
-        itemQuestion.addEventListener('click', function(e) {           /* (a) */
-            itemQuestion.className = 'card-item__question hidden';
-            itemAnswer.className = 'card-item__answer visible';
-            itemObject.updateMarks(1);
-        }, false);
 
         /* When you click on an answer, it becomes editable */
-        itemAnswer.addEventListener('click', function(e) {
-            itemAnswer.setAttribute('contenteditable', true);
+        itemText.addEventListener('click', function(e) {
+            if (this.getAttribute('am-Question') === 'hidden') {
+                itemText.setAttribute('am-Question', 'shown');
+            } else {
+                itemText.setAttribute('am-Question', 'none');
+                itemText.setAttribute('contenteditable', true);
+            }
         }, false)
 
         /* When you type in an answer, it updates the carditem */
-        itemAnswer.addEventListener('keyup', function(e) {
-            itemObject.content = this.textContent;
-
+        itemText.addEventListener('keyup', function(e) {
+            that.content = this.textContent;
         }, false)
 
         return itemHTML;

@@ -43,6 +43,22 @@
     font-size: 2em;
 }
 
+/* LEARNING : amQuestions */
+
+[am-Question] {
+    font-style: inherit;
+    border-radius: 0.1em;
+}
+[am-Question~="shown"] {
+    color: $card_color-shown;
+    transition: all 0.1s ease-in-out;
+}
+[am-Question~="hidden"] {
+    color: $card_color-hidden;
+    background-color: $card_color-hidden;
+}
+
+
 @media screen and (min-width: 30em) {
     .card {
         font-size: 2em;
