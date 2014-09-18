@@ -28,8 +28,10 @@ function CardItem(content, dateCrea, datesModif, question, marks, marksDates) {
 
 
     /* UPDATE MARKS
-        We consider that the person has +1 mark as long as he/she doesn't click
-        on the answer.
+        We consider that the person has +1 mark as long as he/she
+        doesn't click on the answer.
+        When you get a wrong answer, delete the last mark and replace
+        it with the bad mark :p
     */
     this.updateMarks = function(number) {
         var that = this;
@@ -88,7 +90,7 @@ function CardItem(content, dateCrea, datesModif, question, marks, marksDates) {
         }
 
         // CREATE HTML
-        var itemHTML = document.createElement('div');
+        var itemHTML = document.createElement('p');
             itemHTML.className = 'card-item';
             itemHTML.setAttribute('data-state', state);
 
@@ -105,6 +107,7 @@ function CardItem(content, dateCrea, datesModif, question, marks, marksDates) {
         itemText.addEventListener('click', function(e) {
             if (this.getAttribute('am-Question') === 'hidden') {
                 itemText.setAttribute('am-Question', 'shown');
+                that.updateMarks(1);
             } else {
                 itemText.setAttribute('am-Question', 'none');
                 itemText.setAttribute('contenteditable', true);

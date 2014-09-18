@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function() {
 function showAllDeck(deck) {
     var showDeck = deck.name + ':';
     for (var i=0; i<deck.cards.length; i++) {
-        showDeck += deck.cards[i].chinese.content + " | ";
+        showDeck += deck.cards[i].chinese.content + ' ' + deck.cards[i].chinese.marks+ " | ";
     }
     /* KEEP THAT CONSOLE.LOG, IT SHOWS THE STATE OF THE DECK */
     console.log(showDeck);

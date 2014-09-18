@@ -120,13 +120,13 @@ function Card(chinese, pinyin, translation, dateCrea, datesModif) {
                 pinyinState = translationState = 'look';
             } else {
                 /* Randomly choose one to learn : */
-                var randLearn = getRandomInt(1, 3);
+                var randLearn = getRandomInt(1, 2);
                 chineseState = pinyinState = translationState = 'look';
                 if (randLearn === 1) {
                     chineseState = 'learn';
+                    pinyinState = 'learn';
                 } else if (randLearn === 2) {
                     pinyinState = 'learn';
-                } else {
                     translationState = 'learn';
                 }
             }
