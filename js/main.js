@@ -32,9 +32,10 @@ document.addEventListener("DOMContentLoaded", function() {
     Debugging function
 */
 function showAllDeck(deck) {
-    var showDeck = deck.name + ':';
+    var showDeck = deck.name + ': ';
     for (var i=0; i<deck.cards.length; i++) {
-        showDeck += deck.cards[i].chinese.content + ' ' + deck.cards[i].chinese.marks+ " | ";
+        var card = deck.cards[i].chinese.content;
+        showDeck += card + " | ";
     }
     /* KEEP THAT CONSOLE.LOG, IT SHOWS THE STATE OF THE DECK */
     console.log(showDeck);

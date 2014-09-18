@@ -91,31 +91,27 @@ function CardItem(content, dateCrea, datesModif, question, marks, marksDates) {
 
         // CREATE HTML
         var itemHTML = document.createElement('p');
+            itemHTML.textContent = this.content;
             itemHTML.className = 'card-item';
+            itemHTML.setAttribute('am-Question', questionState);
+            itemHTML.setAttribute('contenteditable', editability);
             itemHTML.setAttribute('data-state', state);
-
-            var itemText = document.createElement('span');
-                itemText.textContent = this.content;
-                itemText.setAttribute('am-Question', questionState);
-                itemText.setAttribute('contenteditable', editability);
-
-        itemHTML.appendChild(itemText);
 
         // ADD BEHAVIORS
 
         /* When you click on an answer, it becomes editable */
-        itemText.addEventListener('click', function(e) {
+        itemHTML.addEventListener('click', function(e) {
             if (this.getAttribute('am-Question') === 'hidden') {
-                itemText.setAttribute('am-Question', 'shown');
+                itemHTML.setAttribute('am-Question', 'shown');
                 that.updateMarks(1);
             } else {
-                itemText.setAttribute('am-Question', 'none');
-                itemText.setAttribute('contenteditable', true);
+                itemHTML.setAttribute('am-Question', 'none');
+                itemHTML.setAttribute('contenteditable', true);
             }
         }, false)
 
         /* When you type in an answer, it updates the carditem */
-        itemText.addEventListener('keyup', function(e) {
+        itemHTML.addEventListener('keyup', function(e) {
             that.content = this.textContent;
         }, false)
 
