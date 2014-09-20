@@ -98,7 +98,7 @@ function Deck(name) {
             showAllDeck(that);
 
             if (cardsState === 'edit') {
-                var firstItem = nextCard.querySelector('.card-item__answer');
+                var firstItem = nextCard.querySelector('.card-item');
                 firstItem.focus();
             }
 
