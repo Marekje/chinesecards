@@ -85,7 +85,6 @@ function Card(chinese, pinyin, translation, dateCrea, datesModif) {
     this.createHTML = function(cardState) {
 
         // VARIABLES
-        var cardObject = this;
         var that = this;
         var state;
         cardState ? state = cardState : state = 'learn';
@@ -109,13 +108,13 @@ function Card(chinese, pinyin, translation, dateCrea, datesModif) {
 
             if (chineseKnown === pinyinKnown === translationKnown === 0) {
                 chineseState = pinyinState = translationState = 'look';
-            } else if (translationKnown === 0 || translationKnown === 1 ) {
+            } else if (translationKnown < 2 ) {
                 translationState = 'learn';
                 chineseState = pinyinState = 'look';
-            } else if (pinyinKnown === 0 || pinyinKnown === 1 ) {
+            } else if (pinyinKnown < 2 ) {
                 pinyinState = 'learn';
                 chineseState = translationState = 'look';
-            } else if (chineseKnown === 0 || chineseKnown === 1 ) {
+            } else if (chineseKnown < 2 ) {
                 chineseState = 'learn';
                 pinyinState = translationState = 'look';
             } else {
@@ -143,8 +142,6 @@ function Card(chinese, pinyin, translation, dateCrea, datesModif) {
 
         var cardHTML = Plans.card('card', state, chineseHTML, pinyinHTML, translationHTML);
             cardHTML.setAttribute('data-state', state ? state : 'look');
-
-        // ADD BEHAVIOR
 
         return cardHTML;
     }
