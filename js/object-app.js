@@ -23,12 +23,11 @@ function App(location) {
         The method, the one that creates everything !
     */
     this.main = function() {
-        var theApp = this;
-        var location = theApp.location;
+        var that = this;
+        var location = that.location;
 
-        //theApp.decks.push(mainDeck);
-        this.getDecksFromLS();
-        showAllDeck(theApp.decks[0]);
+        that.getDecksFromLS();
+        showAllDeck(that.decks[0]);
 
         /* HTML BUILDING */
         /* App */
@@ -40,25 +39,25 @@ function App(location) {
         var learn = Plans.menuLink('menu__link', 'Learn');
         var add   = Plans.menuLink('menu__link', 'Add');
 
-        var menu = theApp.createMenuHTML([learn, add]);
+        var menu = that.createMenuHTML([learn, add]);
 
         /* Main location*/
-        var mainContent = theApp.createMainContentHTML();
+        var mainContent = that.createMainContentHTML();
 
         appHTML.appendChild(menu);
         appHTML.appendChild(mainContent);
 
         learn.addEventListener('click', function(e) {
-            theApp.decks[0].whatShouldIDo();
-            theApp.saveDecksToLS();
+            that.decks[0].whatShouldIDo();
+            that.saveDecksToLS();
             mainContent.innerHTML = '';
-            mainContent.appendChild(theApp.decks[0].showCardsOneByOne('learn'));
+            mainContent.appendChild(that.decks[0].showCardsOneByOne('learn'));
         }, false);
         add.addEventListener('click', function(e) {
-            theApp.decks[0].whatShouldIDo();
-            theApp.saveDecksToLS();
+            that.decks[0].whatShouldIDo();
+            that.saveDecksToLS();
             mainContent.innerHTML = '';
-            mainContent.appendChild(theApp.decks[0].showCardsOneByOne('edit'));
+            mainContent.appendChild(that.decks[0].showCardsOneByOne('edit'));
         }, false);
 
         return appHTML;
@@ -122,7 +121,7 @@ function App(location) {
 
     /* GET DECKS FROM LOCASTORAGE*/
     this.getDecksFromLS = function() {
-        var theApp = this;
+        var that = this;
         var decksNamesJSON = localStorage.getItem('decksNames');
         var decksNames = JSON.parse(decksNamesJSON);
         if (decksNames) {
@@ -132,7 +131,7 @@ function App(location) {
                 if (deckCards) {
                     deckCards = JSON.parse(deckCards);
                     for (var i=0; i<deckCards.length; i++) {
-                        var card = theApp.createCardFromArray(deckCards[i]);
+                        var card = that.createCardFromArray(deckCards[i]);
                         deck.cards.push(card);
                     }
                 } else {

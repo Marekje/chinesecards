@@ -25,7 +25,28 @@ function Deck(name) {
 
     /* HELP METHODS */
 
-    this.howMuchUnLearnt = function() {
+
+
+
+    /* HOW MUCH TO LEARN
+    -> returns the number of cards unlearnt (not seen or wrong) yet.
+    -> Studies tells you should try to learn around 10 cards a day.*/
+    this.howManyToLearn = function() {
+        var that = this;
+        var number = 0;
+
+        for (var i=0; i<that.cards.length; i++) {
+            if (that.cards[i].isWellKnown() < 2 && that.cards[i].chinese.content) {
+                number++;
+            }
+        }
+
+        return number;
+    }
+
+    /* HOW MUCH NEW CARDS
+    -> return the number of cards you haven't seent yet */
+    this.howMuchNewCards = function() {
         var that = this;
         var number = 0;
 
@@ -53,13 +74,13 @@ function Deck(name) {
         if (empty) {
             /* Do Nothing */
         } else if (!learnt) {
-            var unLearntCards = that.howMuchUnLearnt();
+            var unLearntCards = that.howMuchNewCards();
             that.cards.splice(unLearntCards, 0, card);
         } else if (howMuchLearning === 0) {
             this.cards.splice(2, 0, card);
         } else {
-            var spliceLvl = howMuchLearning*howMuchLearning; /* the better
-                          you know it, the more space betwwen views */
+            var spliceLvl = 3*howMuchLearning*howMuchLearning; /* the better
+                          you know it, the more space between views */
             if (this.cards.length < spliceLvl) {
                 this.cards.push(card);
             } else {
@@ -98,7 +119,7 @@ function Deck(name) {
             showAllDeck(that);
 
             if (cardsState === 'edit') {
-                var firstItem = nextCard.querySelector('.card-item__answer');
+                var firstItem = nextCard.querySelector('.card-item');
                 firstItem.focus();
             }
 
