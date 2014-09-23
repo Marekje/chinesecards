@@ -141,6 +141,14 @@ function Deck(name) {
             that.cards.unshift(newCard);
             return newCard.createHTML('edit');
         } else {
+            var rand = getRandomInt(1,5);
+            if (rand === 5) {
+                console.log('randomized !');
+                var randCard = getRandomInt(0, that.cards.length);
+                var theCard = that.cards.splice(randCard, 1);
+                that.cards.unshift(theCard[0]);
+                console.log(that.cards);
+            }
             newCard = that.cards[0];
             return newCard.createHTML(state);
         }
