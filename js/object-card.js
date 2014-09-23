@@ -106,7 +106,7 @@ function Card(chinese, pinyin, translation, dateCrea, datesModif) {
             var pinyinKnown = that.pinyin.levelKnown();
             var translationKnown = that.translation.levelKnown();
 
-            if (chineseKnown === pinyinKnown === translationKnown === 0) {
+            if (that.isWellKnown() === 0) {
                 chineseState = pinyinState = translationState = 'look';
             } else if (translationKnown < 2 ) {
                 translationState = 'learn';

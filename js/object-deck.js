@@ -151,7 +151,6 @@ function Deck(name) {
     },
 
     this.takeARandomCard = function() {
-        console.log('randomized');
         var randCard = getRandomInt(0, this.cards.length);
         var theCard = this.cards.splice(randCard, 1);
         this.cards.unshift(theCard[0]);
