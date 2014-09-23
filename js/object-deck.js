@@ -143,18 +143,19 @@ function Deck(name) {
         } else {
             var rand = getRandomInt(1,5);
             if (rand === 5) {
-                console.log('randomized !');
-                var randCard = getRandomInt(0, that.cards.length);
-                var theCard = that.cards.splice(randCard, 1);
-                that.cards.unshift(theCard[0]);
-                console.log(that.cards);
+                that.takeARandomCard();
             }
             newCard = that.cards[0];
             return newCard.createHTML(state);
         }
-
-
     },
+
+    this.takeARandomCard = function() {
+        console.log('randomized');
+        var randCard = getRandomInt(0, this.cards.length);
+        var theCard = this.cards.splice(randCard, 1);
+        this.cards.unshift(theCard[0]);
+    }
 
     /* REPLACE CARD
         replace a car dby another
